@@ -48,6 +48,8 @@ class TransformerModel(nn.Module):
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         self.pos_encoder.to(device)
         self.transformer_encoder.to(device)
+        if not self.vector_input:
+            self.embedding.to(device)
         self.init_weights()
 
     def init_weights(self) -> None:
