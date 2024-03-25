@@ -47,7 +47,6 @@ class TransformerModel(nn.Module):
             self.linear = nn.Linear(d_model, ntoken)
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         self.pos_encoder.to(device)
-        self.encoder_layers.to(device)
         self.transformer_encoder.to(device)
         self.init_weights()
 
