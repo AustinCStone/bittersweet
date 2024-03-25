@@ -64,6 +64,9 @@ def train(encoder_model, decoder_model, train_data, criterion,
     for batch_idx, batch in enumerate(train_data):
         if batch_idx > max_steps:
             break
+
+        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        batch.to(device)
         # Converting binary tokens into vectors.
         # Input from batch is 0s and 1s of shape [batch_size, T]
         # Output shape should be [batch_size, T, d_model]
