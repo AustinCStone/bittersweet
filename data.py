@@ -52,6 +52,9 @@ class ShakespeareBitsDataset(Dataset):
         
         # Convert the string of bits to a tensor of integers (0s and 1s)
         tensor = torch.tensor([int(bit) for bit in sample], dtype=torch.int32)
+        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        tensor.to(device)
+
         
         return tensor
 
