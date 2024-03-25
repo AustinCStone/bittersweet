@@ -19,6 +19,7 @@ class ShakespeareBitsDataset(Dataset):
         # Load the text file
         with open(text_path, 'br') as file:
             text = file.read()
+
         
         # Convert text to binary representation
         self.binary_str = ''.join(format(byte, '08b') for byte in text)
