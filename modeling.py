@@ -64,7 +64,8 @@ class TransformerModel(nn.Module):
                  latent_dim=128,
                  use_vq=False):
         super().__init__()
-        if use_vq:
+        self.use_vq = use_vq
+        if self.use_vq:
             self.codebook = VQEmbedding(num_latent_vectors, latent_dim)
         self.model_type = 'Transformer'
         self.pos_encoder = LearnedPositionEncoding(max_seq_len=max_len, embedding_dim=d_model)
@@ -108,8 +109,9 @@ class TransformerModel(nn.Module):
         output = self.transformer_encoder(src, is_causal=False)
         if self.include_linear:
             output = self.linear(output)
+        if self.use_vq:
+            output = self.codebook(output)
         return output
-
 
 
 class MLPAutoencoder(nn.Module):

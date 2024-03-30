@@ -1,3 +1,4 @@
+# pip install torch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 xformers==0.0.23post1
 import torch
 import data
 import modeling
@@ -133,6 +134,7 @@ def main():
         nlayers=nlayers,
         dropout=dropout,
         include_linear=False,
+        # use_vq=True
         max_len=chunk_size).to(device)
     decoder_model = modeling.TransformerModel(
         ntoken=ntokens,
@@ -143,6 +145,7 @@ def main():
         dropout=dropout,
         include_linear=True,
         vector_input=True,
+        # use_vq=False,
         max_len=chunk_size).to(device)
     # Penalize the model for reconstructing the binary input.
     criterion = torch.nn.CrossEntropyLoss()
