@@ -109,7 +109,7 @@ def train(encoder_model, decoder_model, train_data, criterion,
 
 def main():
     # Load data
-    chunk_size=64 # Encode just 8 bits sequence length.
+    chunk_size=32 # Encode just 8 bits sequence length.
     split_percentage=0.8 # Use 80% of data for training.
     batch_size=1024
     train_data, eval_data = data.create_data_loaders(
