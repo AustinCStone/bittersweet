@@ -61,12 +61,11 @@ class TransformerModel(nn.Module):
                  vector_input: bool = False,
                  max_len: int = 64,
                  num_latent_vectors=512,
-                 latent_dim=128,
                  use_vq=False):
         super().__init__()
         self.use_vq = use_vq
         if self.use_vq:
-            self.codebook = VQEmbedding(num_latent_vectors, latent_dim)
+            self.codebook = VQEmbedding(num_latent_vectors, d_model)
         self.model_type = 'Transformer'
         self.pos_encoder = LearnedPositionEncoding(max_seq_len=max_len, embedding_dim=d_model)
         encoder_layers = TransformerEncoderLayer(d_model, nhead, d_hid, dropout, batch_first=True)
@@ -110,7 +109,8 @@ class TransformerModel(nn.Module):
         if self.include_linear:
             output = self.linear(output)
         if self.use_vq:
-            output = self.codebook(output)
+            hard_output_st, hard_output = self.codebook.straight_through(output)
+            return hard_output_st, hard_output, output # Return hard predictions and soft predictions
         return output
 
 
@@ -140,6 +140,7 @@ class MLPAutoencoder(nn.Module):
         
         reconstructed = encoded
         for layer in self.decoder_layers:
-            reconstructed = layer(reconstructed)
+
+            ghar = layer(reconstructed)
         
         return reconstructed

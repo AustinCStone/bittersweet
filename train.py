@@ -1,6 +1,7 @@
 # pip install torch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 xformers==0.0.23post1
 import torch
 import data
+import torch.nn.functional as F
 import modeling
 from torchviz import make_dot
 
@@ -22,15 +23,15 @@ def evaluate(encoder_model, decoder_model, eval_data, criterion,
             batch = batch.to(device)
             T = batch.shape[1]  # Assuming T is the sequence length from inputs
 
-            preds = encoder_model(batch)
-            latent = preds[:, -1, :]
+            hard_preds_st, _, _ = encoder_model(batch) 
+            # latent = preds[:, -1, :]
             # Tile the mean prediction.
-            tiled_latent = latent 
+            # tiled_latent = latent 
             # tiled_latent = torch.mean(preds, dim=1, keepdims=True)
-            tiled_latent = latent.unsqueeze(1)  
+            # tiled_latent = latent.unsqueeze(1)  
 
-            tiled_latent = tiled_latent.expand(-1, T, -1)
-            reconstructed = decoder_model(tiled_latent)
+            # tiled_latent = tiled_latent.expand(-1, T, -1)
+            reconstructed = decoder_model(hard_preds_st)
             num_classes = reconstructed.shape[-1]
             reconstructed_flat = reconstructed.view(-1, num_classes)
             targets_flat = batch.view(-1).long()
@@ -76,40 +77,40 @@ def train(encoder_model, decoder_model, train_data, criterion,
         # Converting binary tokens into vectors.
         # Input from batch is 0s and 1s of shape [batch_size, T]
         # Output shape should be [batch_size, T, d_model]
-        preds = encoder_model(batch) 
+        optimizer.zero_grad()
+        hard_preds_st, hard_preds, soft_preds = encoder_model(batch) 
         # Take the last prediction as the latent vector.
         # It should have shape [batch_size, d_model]
         #latent = tiled_latent = preds
-        latent = preds[:, -1, :]
+        # latent = hard_preds[:, -1, :]
         # 0/0
         # Tile the latent in order to get the desired output
         # size. The output should have shape [batch_size, T, d_model]
-        T = preds.shape[1]  # Assuming T is the sequence length from preds
+        # T = hard_preds.shape[1]  # Assuming T is the sequence length from preds
         # Tile the mean prediction.
-        tiled_latent = latent.unsqueeze(1)  
+        # tiled_latent = latent.unsqueeze(1)  
         #tiled_latent = torch.mean(preds, dim=1, keepdims=True)
         # print("Tiled latent size", tiled_latent.shape)
         # print("Tiled latent", tiled_latent)
-        tiled_latent = tiled_latent.expand(-1, T, -1)
+        # tiled_latent = tiled_latent.expand(-1, T, -1)
         # print("Tiled latent 2", tiled_latent)
-
-        reconstructed = decoder_model(tiled_latent)
-        
-        yhat = reconstructed
+        reconstructed = decoder_model(hard_preds_st)
+        # yhat = reconstructed
         #make_dot(yhat, params=dict(list(encoder_model.named_parameters()) + list(decoder_model.named_parameters()))).render("rnn_torchviz", format="png")
-
         num_classes = reconstructed.shape[-1]
-        loss = criterion(reconstructed.view(-1, num_classes), batch.view(-1).long())
-        optimizer.zero_grad()
+        loss_recon = criterion(reconstructed.view(-1, num_classes), batch.view(-1).long())
+        loss_vq = F.mse_loss(hard_preds, soft_preds.detach())
+        loss_commit = F.mse_loss(soft_preds, hard_preds.detach())
+        loss = loss_recon + loss_vq + loss_commit
         loss.backward()
         torch.nn.utils.clip_grad_norm_(list(encoder_model.parameters()) + list(decoder_model.parameters()), 0.5)
         optimizer.step()
         if batch_idx % log_interval == 0:  # log_interval could be, e.g., 10
-            print(f'Batch: {batch_idx}, Loss: {loss.item()}')
+            print(f'Batch: {batch_idx}, Loss: {loss.item()}, Recon loss: {loss_recon.item()}, VQ loss: {loss_vq.item()}, Commit loss: {loss_commit.item()}')
 
 def main():
     # Load data
-    chunk_size=32 # Encode just 8 bits sequence length.
+    chunk_size=8 # Encode just 8 bits sequence length.
     split_percentage=0.8 # Use 80% of data for training.
     batch_size=512
     train_data, eval_data = data.create_data_loaders(
@@ -121,9 +122,9 @@ def main():
     ntokens = 256  # All bytes.
     # latent_tokens = 512  # 512 latent tokens
     # emsize = 128 # embedding dimension
-    d_model = 768
-    d_hid = 1024  # dimension of the feedforward network model in ``nn.TransformerEncoder``
-    nlayers = 16  # number of ``nn.TransformerEncoderLayer`` in ``nn.TransformerEncoder``
+    d_model = 256
+    d_hid = 512  # dimension of the feedforward network model in ``nn.TransformerEncoder``
+    nlayers = 8  # number of ``nn.TransformerEncoderLayer`` in ``nn.TransformerEncoder``
     nhead = 6  # number of heads in ``nn.MultiheadAttention``
     dropout = 0.  # dropout probability
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -135,7 +136,8 @@ def main():
         nlayers=nlayers,
         dropout=dropout,
         include_linear=False,
-        # use_vq=True
+        use_vq=True,
+        num_latent_vectors=512,
         max_len=chunk_size).to(device)
     decoder_model = modeling.TransformerModel(
         ntoken=ntokens,
@@ -146,7 +148,7 @@ def main():
         dropout=dropout,
         include_linear=True,
         vector_input=True,
-        # use_vq=False,
+        use_vq=False,
         max_len=chunk_size).to(device)
     # Penalize the model for reconstructing the binary input.
     criterion = torch.nn.CrossEntropyLoss()
