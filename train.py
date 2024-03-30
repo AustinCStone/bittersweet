@@ -109,9 +109,9 @@ def train(encoder_model, decoder_model, train_data, criterion,
 
 def main():
     # Load data
-    chunk_size=16 # Encode just 8 bits sequence length.
+    chunk_size=64 # Encode just 8 bits sequence length.
     split_percentage=0.8 # Use 80% of data for training.
-    batch_size=64
+    batch_size=1024
     train_data, eval_data = data.create_data_loaders(
         'input.txt',
         chunk_size=chunk_size,
@@ -121,11 +121,11 @@ def main():
     ntokens = 256  # All bytes.
     # latent_tokens = 512  # 512 latent tokens
     # emsize = 128 # embedding dimension
-    d_model = 128
-    d_hid = 512  # dimension of the feedforward network model in ``nn.TransformerEncoder``
-    nlayers = 8  # number of ``nn.TransformerEncoderLayer`` in ``nn.TransformerEncoder``
-    nhead = 1  # number of heads in ``nn.MultiheadAttention``
-    dropout = 0  # dropout probability
+    d_model = 768
+    d_hid = 1024  # dimension of the feedforward network model in ``nn.TransformerEncoder``
+    nlayers = 16  # number of ``nn.TransformerEncoderLayer`` in ``nn.TransformerEncoder``
+    nhead = 6  # number of heads in ``nn.MultiheadAttention``
+    dropout = 0.  # dropout probability
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     encoder_model = modeling.TransformerModel(
         ntoken=ntokens,
