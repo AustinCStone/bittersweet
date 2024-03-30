@@ -18,7 +18,8 @@ def evaluate(encoder_model, decoder_model, eval_data, criterion,
         for batch_idx, batch in enumerate(eval_data):
             if batch_idx >= num_evals:  # Ensure it breaks at num_evals
                 break
-
+            device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+            batch = batch.to(device)
             T = batch.shape[1]  # Assuming T is the sequence length from inputs
 
             preds = encoder_model(batch)
