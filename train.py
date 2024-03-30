@@ -1,6 +1,7 @@
 import torch
 import data
 import modeling
+from torchviz import make_dot
 
 
 def evaluate(encoder_model, decoder_model, eval_data, criterion,
@@ -21,12 +22,15 @@ def evaluate(encoder_model, decoder_model, eval_data, criterion,
 
             preds = encoder_model(batch)
             latent = preds[:, -1, :]
-            tiled_latent = latent.unsqueeze(1).expand(-1, T, -1)
-            tiled_latent = torch.mean(preds, dim=1, keepdims=True)
+            # Tile the mean prediction.
+            tiled_latent = latent 
+            # tiled_latent = torch.mean(preds, dim=1, keepdims=True)
+            tiled_latent = latent.unsqueeze(1)  
+
             tiled_latent = tiled_latent.expand(-1, T, -1)
             reconstructed = decoder_model(tiled_latent)
-
-            reconstructed_flat = reconstructed.view(-1, 2)
+            num_classes = reconstructed.shape[-1]
+            reconstructed_flat = reconstructed.view(-1, num_classes)
             targets_flat = batch.view(-1).long()
 
             loss = criterion(reconstructed_flat, targets_flat)
@@ -41,9 +45,9 @@ def evaluate(encoder_model, decoder_model, eval_data, criterion,
                 predicted_labels_reshaped = predicted_labels.view(batch.shape[0], T)
                 print("Batch", batch_idx)
                 for i in range(min(len(batch), samples_to_print)):
-                    print(f"Ground Truth: {''.join(map(str, batch[i].tolist()))}")
-                    print(f"Prediction:  {''.join(map(str, predicted_labels_reshaped[i].tolist()))}\n")
-                    print(f"Soft prediction:  {''.join(map(str, soft_prediction[i].tolist()))}\n")
+                    print(f"Ground Truth: {','.join(map(str, batch[i].tolist()))}")
+                    print(f"Prediction:  {','.join(map(str, predicted_labels_reshaped[i].tolist()))}\n")
+                    # print(f"Soft prediction:  {''.join(map(str, soft_prediction[i].tolist()))}\n")
 
     avg_loss = total_loss / min(batch_idx + 1, num_evals)
     accuracy = correct_predictions / total_predictions * 100
@@ -66,50 +70,64 @@ def train(encoder_model, decoder_model, train_data, criterion,
             break
 
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-        batch.to(device)
+        batch = batch.to(device)
         # Converting binary tokens into vectors.
         # Input from batch is 0s and 1s of shape [batch_size, T]
         # Output shape should be [batch_size, T, d_model]
         preds = encoder_model(batch) 
         # Take the last prediction as the latent vector.
         # It should have shape [batch_size, d_model]
+        #latent = tiled_latent = preds
         latent = preds[:, -1, :]
+        # 0/0
         # Tile the latent in order to get the desired output
         # size. The output should have shape [batch_size, T, d_model]
         T = preds.shape[1]  # Assuming T is the sequence length from preds
-        tiled_latent = latent.unsqueeze(1).expand(-1, T, -1)
-        tiled_latent = torch.mean(preds, dim=1, keepdims=True)
+        # Tile the mean prediction.
+        tiled_latent = latent.unsqueeze(1)  
+        #tiled_latent = torch.mean(preds, dim=1, keepdims=True)
+        # print("Tiled latent size", tiled_latent.shape)
+        # print("Tiled latent", tiled_latent)
         tiled_latent = tiled_latent.expand(-1, T, -1)
+        # print("Tiled latent 2", tiled_latent)
+
         reconstructed = decoder_model(tiled_latent)
-        loss = criterion(reconstructed.view(-1, 2), batch.view(-1).long())
+        
+        yhat = reconstructed
+        #make_dot(yhat, params=dict(list(encoder_model.named_parameters()) + list(decoder_model.named_parameters()))).render("rnn_torchviz", format="png")
+
+        num_classes = reconstructed.shape[-1]
+        loss = criterion(reconstructed.view(-1, num_classes), batch.view(-1).long())
         optimizer.zero_grad()
         loss.backward()
+        torch.nn.utils.clip_grad_norm_(list(encoder_model.parameters()) + list(decoder_model.parameters()), 0.5)
         optimizer.step()
         if batch_idx % log_interval == 0:  # log_interval could be, e.g., 10
             print(f'Batch: {batch_idx}, Loss: {loss.item()}')
 
-
 def main():
-    # Load dataq
-    chunk_size=1024
-    split_percentage=0.8
+    # Load data
+    chunk_size=16 # Encode just 8 bits sequence length.
+    split_percentage=0.8 # Use 80% of data for training.
     batch_size=64
     train_data, eval_data = data.create_data_loaders(
         'input.txt',
         chunk_size=chunk_size,
         split_percentage=split_percentage,
-        batch_size=batch_size)
-    ntokens = 2  # 1 and 0
+        batch_size=batch_size,
+        use_bits=False)
+    ntokens = 256  # All bytes.
     # latent_tokens = 512  # 512 latent tokens
-    emsize = 128 # embedding dimension
-    d_hid = 1024  # dimension of the feedforward network model in ``nn.TransformerEncoder``
+    # emsize = 128 # embedding dimension
+    d_model = 128
+    d_hid = 512  # dimension of the feedforward network model in ``nn.TransformerEncoder``
     nlayers = 8  # number of ``nn.TransformerEncoderLayer`` in ``nn.TransformerEncoder``
-    nhead = 8  # number of heads in ``nn.MultiheadAttention``
-    dropout = 0.2  # dropout probability
+    nhead = 1  # number of heads in ``nn.MultiheadAttention``
+    dropout = 0  # dropout probability
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     encoder_model = modeling.TransformerModel(
         ntoken=ntokens,
-        d_model=emsize,
+        d_model=d_model,
         nhead=nhead,
         d_hid=d_hid,
         nlayers=nlayers,
@@ -118,7 +136,7 @@ def main():
         max_len=chunk_size).to(device)
     decoder_model = modeling.TransformerModel(
         ntoken=ntokens,
-        d_model=emsize,
+        d_model=d_model,
         d_hid=d_hid,
         nlayers=nlayers,
         nhead=nhead,
@@ -129,7 +147,8 @@ def main():
     # Penalize the model for reconstructing the binary input.
     criterion = torch.nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(list(encoder_model.parameters()) + list(decoder_model.parameters()),
-                                 lr=1e-4)
+                                 lr=1e-5)
+    
     while 1:
         train(encoder_model, decoder_model, train_data,
             criterion=criterion, optimizer=optimizer)

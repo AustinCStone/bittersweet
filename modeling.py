@@ -10,6 +10,33 @@ import torch
 from torch import nn, Tensor
 from torch.nn import TransformerEncoder, TransformerEncoderLayer
 from torch.utils.data import dataset
+from functions import vq, vq_st
+
+
+class VQEmbedding(nn.Module):
+
+    def __init__(self, K, D):
+        super().__init__()
+        self.embedding = nn.Embedding(K, D)
+        self.embedding.weight.data.uniform_(-1./K, 1./K)
+
+    def forward(self, z_e_x):
+        # Assumed that z_e_x is of shape (batch size, sequence length, embedding size)
+        z_e_x_ = z_e_x.contiguous()
+        latents = vq(z_e_x_, self.embedding.weight)
+        return latents
+
+    def straight_through(self, z_e_x):
+        # Assumed that z_e_x is of shape (batch size, sequence length, embedding size)
+        z_e_x_ = z_e_x.contiguous()
+        z_q_x_, indices = vq_st(z_e_x_, self.embedding.weight.detach())
+        z_q_x = z_q_x_.contiguous()
+
+        z_q_x_bar_flatten = torch.index_select(self.embedding.weight,
+            dim=0, index=indices)
+        z_q_x_bar_ = z_q_x_bar_flatten.view_as(z_e_x_)
+        z_q_x_bar = z_q_x_bar_.contiguous()
+        return z_q_x, z_q_x_bar
 
 
 class LearnedPositionEncoding(nn.Module):
@@ -32,11 +59,16 @@ class TransformerModel(nn.Module):
                  nlayers: int, dropout: float = 0.5,
                  include_linear: bool = False,
                  vector_input: bool = False,
-                 max_len: int = 64):
+                 max_len: int = 64,
+                 num_latent_vectors=512,
+                 latent_dim=128,
+                 use_vq=False):
         super().__init__()
+        if use_vq:
+            self.codebook = VQEmbedding(num_latent_vectors, latent_dim)
         self.model_type = 'Transformer'
         self.pos_encoder = LearnedPositionEncoding(max_seq_len=max_len, embedding_dim=d_model)
-        encoder_layers = TransformerEncoderLayer(d_model, nhead, d_hid, dropout)
+        encoder_layers = TransformerEncoderLayer(d_model, nhead, d_hid, dropout, batch_first=True)
         self.transformer_encoder = TransformerEncoder(encoder_layers, nlayers)
         self.vector_input = vector_input
         if not self.vector_input:
@@ -63,16 +95,49 @@ class TransformerModel(nn.Module):
     def forward(self, src: Tensor) -> Tensor:
         """
         Arguments:
-            src: Tensor, shape ``[seq_len, batch_size]``
-            src_mask: Tensor, shape ``[seq_len, seq_len]``
+            src: Tensor, shape ``[batch_len, seq_len]`` if not vector_input
+                else ``[batch_len, seq_len, d_model]``
 
         Returns:
-            output Tensor of shape ``[seq_len, batch_size, ntoken]``
+            output Tensor of shape ``[batch_size, seq_len, ntoken]`` if include_linear
+                else ``[batch_size, seq_len, d_model]``
         """
         if not self.vector_input:
             src = self.embedding(src) * math.sqrt(self.d_model)
         src = self.pos_encoder(src)
-        output = self.transformer_encoder(src)
+        output = self.transformer_encoder(src, is_causal=False)
         if self.include_linear:
             output = self.linear(output)
         return output
+
+
+
+class MLPAutoencoder(nn.Module):
+    def __init__(self, input_dim, hidden_dims):
+        super(MLPAutoencoder, self).__init__()
+        
+        self.encoder_layers = nn.ModuleList()
+        prev_dim = input_dim
+        for hidden_dim in hidden_dims:
+            self.encoder_layers.append(nn.Linear(prev_dim, hidden_dim))
+            self.encoder_layers.append(nn.ReLU())
+            prev_dim = hidden_dim
+        
+        self.decoder_layers = nn.ModuleList()
+        for hidden_dim in reversed(hidden_dims[:-1]):
+            self.decoder_layers.append(nn.Linear(prev_dim, hidden_dim))
+            self.decoder_layers.append(nn.ReLU())
+            prev_dim = hidden_dim
+        self.decoder_layers.append(nn.Linear(prev_dim, input_dim))
+        self.decoder_layers.append(nn.Softmax(dim=1))  # Apply softmax activation along feature dimension
+
+    def forward(self, x):
+        encoded = x
+        for layer in self.encoder_layers:
+            encoded = layer(encoded)
+        
+        reconstructed = encoded
+        for layer in self.decoder_layers:
+            reconstructed = layer(reconstructed)
+        
+        return reconstructed
