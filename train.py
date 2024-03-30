@@ -111,7 +111,7 @@ def main():
     # Load data
     chunk_size=32 # Encode just 8 bits sequence length.
     split_percentage=0.8 # Use 80% of data for training.
-    batch_size=1024
+    batch_size=512
     train_data, eval_data = data.create_data_loaders(
         'input.txt',
         chunk_size=chunk_size,
