@@ -8,7 +8,7 @@ import modeling
 from torchviz import make_dot
 import wandb
 
-DEBUG=True
+DEBUG=False
 
 def evaluate(encoder_model, decoder_model, eval_data, criterion,
              num_evals=1, print_predictions=True, samples_to_print=1):
@@ -145,13 +145,13 @@ def main():
     else:
         config = {
             # Load data
-            'chunk_size':128, # Encode 8 bytes sequence length.
-            'split_percentage':0.8, # Use 80% of data for training.
-            'batch_size':512,
-            'lr':1e-4,
-            'ntokens':256,  # All bytes.
-            'd_model':256,
-            'd_hid':512,  # dimension of the feedforward network model in ``nn.TransformerEncoder``
+            'chunk_size': 128, # Encode 8 bytes sequence length.
+            'split_percentage': 0.8, # Use 80% of data for training.
+            'batch_size': 512,
+            'lr': 1e-4,
+            'ntokens': 256,  # All bytes.
+            'd_model': 768,
+            'd_hid': 768,  # dimension of the feedforward network model in ``nn.TransformerEncoder``
             'nlayers':16,  # number of ``nn.TransformerEncoderLayer`` in ``nn.TransformerEncoder``
             'nhead': 6,  # number of heads in ``nn.MultiheadAttention``
             'dropout': 0.2,  # dropout probability
