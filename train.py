@@ -1,10 +1,14 @@
 # pip install torch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 xformers==0.0.23post1
+# wandb key: 4d89c43f67fc55f37cc6e65e9304ef29b1a454f3
 import torch
+import numpy as np
 import data
 import torch.nn.functional as F
 import modeling
 from torchviz import make_dot
+import wandb
 
+DEBUG=True
 
 def evaluate(encoder_model, decoder_model, eval_data, criterion,
              num_evals=1, print_predictions=True, samples_to_print=1):
@@ -54,7 +58,8 @@ def evaluate(encoder_model, decoder_model, eval_data, criterion,
 
     avg_loss = total_loss / min(batch_idx + 1, num_evals)
     accuracy = correct_predictions / total_predictions * 100
-
+    if not DEBUG:
+        wandb.log({'eval_loss': avg_loss, 'eval_accuracy': accuracy})
     print(f'Evaluation - Loss: {avg_loss:.4f}, Accuracy: {accuracy:.2f}%')
 
     return avg_loss, accuracy
@@ -64,10 +69,15 @@ def evaluate(encoder_model, decoder_model, eval_data, criterion,
 
 
 def train(encoder_model, decoder_model, train_data, criterion,
-          optimizer, log_interval=1, max_steps=100):
+          optimizer, log_interval=1, max_steps=100, start_step=0):
     encoder_model.train()  # turn on train mode
     decoder_model.train()  # turn on train mode
     criterion = torch.nn.CrossEntropyLoss()
+    losses = {
+        'loss_recon': [],
+        'vq_loss': [],
+        'commit_loss': [],
+    }
     for batch_idx, batch in enumerate(train_data):
         if batch_idx > max_steps:
             break
@@ -106,60 +116,100 @@ def train(encoder_model, decoder_model, train_data, criterion,
         torch.nn.utils.clip_grad_norm_(list(encoder_model.parameters()) + list(decoder_model.parameters()), 0.5)
         optimizer.step()
         if batch_idx % log_interval == 0:  # log_interval could be, e.g., 10
-            print(f'Batch: {batch_idx}, Loss: {loss.item()}, Recon loss: {loss_recon.item()}, VQ loss: {loss_vq.item()}, Commit loss: {loss_commit.item()}')
+            print(f'Batch: {batch_idx + start_step}, Loss: {loss.item()}, Recon loss: {loss_recon.item()}, VQ loss: {loss_vq.item()}, Commit loss: {loss_commit.item()}')
+            losses['loss_recon'].append(loss_recon.item())
+            losses['vq_loss'].append(loss_vq.item())
+            losses['commit_loss'].append(loss_commit.item())
+            if not DEBUG:
+                wandb.log({'train_loss_recon': loss_recon.item(), 'train_vq_loss': loss_vq.item(), 'train_commit_loss': loss_commit.item()})
+    return {k: np.mean(v) for k, v in losses.items()}
 
 def main():
-    # Load data
-    chunk_size=8 # Encode just 8 bits sequence length.
-    split_percentage=0.8 # Use 80% of data for training.
-    batch_size=512
+    if DEBUG:
+        config = {
+            # Load data
+            'chunk_size':8, # Encode 8 bytes sequence length.
+            'split_percentage':0.8, # Use 80% of data for training.
+            'batch_size':512,
+            'lr':1e-4,
+            'ntokens':256,  # All bytes.
+            'd_model':256,
+            'd_hid':512,  # dimension of the feedforward network model in ``nn.TransformerEncoder``
+            'nlayers':8,  # number of ``nn.TransformerEncoderLayer`` in ``nn.TransformerEncoder``
+            'nhead': 2,  # number of heads in ``nn.MultiheadAttention``
+            'dropout': 0.2,  # dropout probability
+            'num_latent_vectors': 24_000,
+            'use_bits': False,
+            'compression_factor': 2,
+        }
+    else:
+        config = {
+            # Load data
+            'chunk_size':128, # Encode 8 bytes sequence length.
+            'split_percentage':0.8, # Use 80% of data for training.
+            'batch_size':512,
+            'lr':1e-4,
+            'ntokens':256,  # All bytes.
+            'd_model':256,
+            'd_hid':512,  # dimension of the feedforward network model in ``nn.TransformerEncoder``
+            'nlayers':16,  # number of ``nn.TransformerEncoderLayer`` in ``nn.TransformerEncoder``
+            'nhead': 6,  # number of heads in ``nn.MultiheadAttention``
+            'dropout': 0.2,  # dropout probability
+            'num_latent_vectors': 24_000,
+            'use_bits': False,
+            'compression_factor': 2,
+        }
+    # start a new wandb run to track this script
+    if not DEBUG:
+        wandb.init(
+            # set the wandb project where this run will be logged
+            project="rackitten-tokenizer",
+            # track hyperparameters and run metadata
+            config=config
+        )
     train_data, eval_data = data.create_data_loaders(
         'input.txt',
-        chunk_size=chunk_size,
-        split_percentage=split_percentage,
-        batch_size=batch_size,
-        use_bits=False)
-    ntokens = 256  # All bytes.
-    # latent_tokens = 512  # 512 latent tokens
-    # emsize = 128 # embedding dimension
-    d_model = 256
-    d_hid = 512  # dimension of the feedforward network model in ``nn.TransformerEncoder``
-    nlayers = 8  # number of ``nn.TransformerEncoderLayer`` in ``nn.TransformerEncoder``
-    nhead = 6  # number of heads in ``nn.MultiheadAttention``
-    dropout = 0.  # dropout probability
+        chunk_size=config['chunk_size'],
+        split_percentage=config['split_percentage'],
+        batch_size=config['batch_size'],
+        use_bits=config['use_bits'])
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     encoder_model = modeling.TransformerModel(
-        ntoken=ntokens,
-        d_model=d_model,
-        nhead=nhead,
-        d_hid=d_hid,
-        nlayers=nlayers,
-        dropout=dropout,
+        ntoken=config['ntokens'],
+        d_model=config['d_model'],
+        nhead=config['nhead'],
+        d_hid=config['d_hid'],
+        nlayers=config['nlayers'],
+        dropout=config['dropout'],
         include_linear=False,
         use_vq=True,
-        num_latent_vectors=512,
-        max_len=chunk_size).to(device)
+        num_latent_vectors=config['num_latent_vectors'],
+        max_len=config['chunk_size'],
+        compression_factor=config['compression_factor']).to(device)
+    assert config['d_model'] % config['compression_factor'] == 0
     decoder_model = modeling.TransformerModel(
-        ntoken=ntokens,
-        d_model=d_model,
-        d_hid=d_hid,
-        nlayers=nlayers,
-        nhead=nhead,
-        dropout=dropout,
+        ntoken=config['ntokens'],
+        d_model=config['d_model'] // config['compression_factor'],
+        d_hid=config['d_hid'],
+        nlayers=config['nlayers'],
+        nhead=config['nhead'],
+        dropout=config['dropout'],
         include_linear=True,
         vector_input=True,
         use_vq=False,
-        max_len=chunk_size).to(device)
+        max_len=config['chunk_size']).to(device)
     # Penalize the model for reconstructing the binary input.
     criterion = torch.nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(list(encoder_model.parameters()) + list(decoder_model.parameters()),
-                                 lr=1e-5)
-    
-    while 1:
-        train(encoder_model, decoder_model, train_data,
-            criterion=criterion, optimizer=optimizer)
-        evaluate(encoder_model, decoder_model, eval_data,
-                criterion=criterion)
-
+                                 lr=config['lr'])
+    steps = 0
+    for _ in range(1000):
+        train_losses = train(encoder_model, decoder_model, train_data,
+                             criterion=criterion, optimizer=optimizer,
+                             start_step=steps, max_steps=1000)
+        steps += 1000
+        avg_loss, accuracy = evaluate(encoder_model, decoder_model, eval_data,
+                                      criterion=criterion)
+    wandb.finish()
 if __name__ == "__main__":
     main()  # Call the main function

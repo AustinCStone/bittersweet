@@ -61,9 +61,11 @@ class TransformerModel(nn.Module):
                  vector_input: bool = False,
                  max_len: int = 64,
                  num_latent_vectors=512,
-                 use_vq=False):
+                 use_vq=False,
+                 compression_factor=None):
         super().__init__()
         self.use_vq = use_vq
+        self.compression_factor = compression_factor
         if self.use_vq:
             self.codebook = VQEmbedding(num_latent_vectors, d_model)
         self.model_type = 'Transformer'
@@ -110,37 +112,22 @@ class TransformerModel(nn.Module):
             output = self.linear(output)
         if self.use_vq:
             hard_output_st, hard_output = self.codebook.straight_through(output)
+            if self.compression_factor is not None:
+                assert self.compression_factor == 2
+                # Split and concat...
+                def split(x):
+                    tokens_to_take = int(x.shape[1] / self.compression_factor)
+                    sub_x = x[:, :tokens_to_take, :]
+                    assert sub_x.shape[-1] % 2 == 0
+                    half1, half2 = sub_x.split(int(sub_x.shape[-1] / 2), dim=2)
+                    half1_reshaped = half1.unsqueeze(2) 
+                    half2_reshaped = half2.unsqueeze(2)
+                    interleaved = torch.cat((half1_reshaped, half2_reshaped), dim=2)
+                    interleaved = interleaved.view(x.shape[0], x.shape[1], int(x.shape[-1] / 2))
+                    return interleaved
+                hard_output_st = split(hard_output_st)
+                hard_output = split(hard_output)
+                output = split(output)
             return hard_output_st, hard_output, output # Return hard predictions and soft predictions
         return output
 
-
-class MLPAutoencoder(nn.Module):
-    def __init__(self, input_dim, hidden_dims):
-        super(MLPAutoencoder, self).__init__()
-        
-        self.encoder_layers = nn.ModuleList()
-        prev_dim = input_dim
-        for hidden_dim in hidden_dims:
-            self.encoder_layers.append(nn.Linear(prev_dim, hidden_dim))
-            self.encoder_layers.append(nn.ReLU())
-            prev_dim = hidden_dim
-        
-        self.decoder_layers = nn.ModuleList()
-        for hidden_dim in reversed(hidden_dims[:-1]):
-            self.decoder_layers.append(nn.Linear(prev_dim, hidden_dim))
-            self.decoder_layers.append(nn.ReLU())
-            prev_dim = hidden_dim
-        self.decoder_layers.append(nn.Linear(prev_dim, input_dim))
-        self.decoder_layers.append(nn.Softmax(dim=1))  # Apply softmax activation along feature dimension
-
-    def forward(self, x):
-        encoded = x
-        for layer in self.encoder_layers:
-            encoded = layer(encoded)
-        
-        reconstructed = encoded
-        for layer in self.decoder_layers:
-
-            ghar = layer(reconstructed)
-        
-        return reconstructed
