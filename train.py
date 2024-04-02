@@ -134,7 +134,7 @@ def train(encoder_model, decoder_model, train_data, criterion,
         # Input from batch is 0s and 1s of shape [batch_size, T]
         # Output shape should be [batch_size, T, d_model]
         optimizer.zero_grad()
-        hard_preds_st, hard_preds, soft_preds = encoder_model(batch) 
+        hard_preds_st, hard_preds, soft_preds, tokens = encoder_model(batch) 
         # Take the last prediction as the latent vector.
         # It should have shape [batch_size, d_model]
         #latent = tiled_latent = preds
@@ -167,6 +167,8 @@ def train(encoder_model, decoder_model, train_data, criterion,
             print(f'Batch: {batch_idx + start_step}, Loss: {loss.item()}, '
                   f'Recon loss: {loss_recon.item()}, VQ loss: {loss_vq.item()}, Commit loss: {loss_commit.item()}, '
                   f'Diversity loss: {loss_div.item()}')
+            print("Ground truth:", batch[0])
+            print("Latent prediction:", tokens[0])
             losses['loss_recon'].append(loss_recon.item())
             losses['vq_loss'].append(loss_vq.item())
             losses['commit_loss'].append(loss_commit.item())
@@ -203,14 +205,14 @@ def main():
             # Load data
             'chunk_size': 128, # Encode 8 bytes sequence length.
             'split_percentage': 0.8, # Use 80% of data for training.
-            'batch_size': 512,
+            'batch_size': 128,
             'lr': 1e-4,
             'diversity_weight': 5.0,
             # model hypers
             'ntokens': 256,  # All bytes.
-            'd_model': 768,
-            'd_hid': 768,  # dimension of the feedforward network model in ``nn.TransformerEncoder``
-            'nlayers':16,  # number of ``nn.TransformerEncoderLayer`` in ``nn.TransformerEncoder``
+            'd_model': 512,
+            'd_hid': 512,  # dimension of the feedforward network model in ``nn.TransformerEncoder``
+            'nlayers':4,  # number of ``nn.TransformerEncoderLayer`` in ``nn.TransformerEncoder``
             'nhead': 6,  # number of heads in ``nn.MultiheadAttention``
             'dropout': 0.2,  # dropout probability
             'num_latent_vectors': 24_000,

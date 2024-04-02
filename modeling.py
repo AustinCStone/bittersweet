@@ -121,14 +121,16 @@ class TransformerModel(nn.Module):
         if self.include_linear:
             output = self.linear(output)
         if self.use_vq:
+            import ipdb; ipdb.set_trace()
             hard_output_st, hard_output = self.codebook.straight_through(output)
+            tokens = self.codebook(output)
             if self.compression_factor is not None:
                 assert self.compression_factor == 2
                 # Split and concat...
                 hard_output_st = split(hard_output_st, self.compression_factor)
                 hard_output = split(hard_output, self.compression_factor)
                 output = split(output, self.compression_factor)
-            return hard_output_st, hard_output, output # Return hard predictions and soft predictions
+            return hard_output_st, hard_output, output, tokens # Return hard predictions and soft predictions
         if self.compression_factor is not None:
             assert self.compression_factor == 2
             output = split(output, self.compression_factor)
