@@ -5,10 +5,54 @@ import numpy as np
 import data
 import torch.nn.functional as F
 import modeling
-from torchviz import make_dot
+# from torchviz import make_dot
 import wandb
 
-DEBUG=False
+DEBUG=True
+USE_WANDB=False
+
+
+import torch
+import torch.nn.functional as F
+
+
+def diversity_loss(vectors, subsample_size=1000):
+    """
+    Compute the diversity loss for a batch of vectors with random subsampling to avoid large similarity matrix computations.
+    
+    Args:
+    - vectors (Tensor): A 3D tensor of shape (batch_size, sequence_dim, vector_dim) where each row is a vector.
+    - subsample_size (int): The number of vectors to randomly subsample for the diversity calculation.
+    
+    Returns:
+    - loss (Tensor): A scalar tensor representing the diversity loss.
+    """
+    batch_size, seq_dim, vector_dim = vectors.shape
+
+    # Reshape to treat each vector in the sequence separately
+    vectors = vectors.reshape(batch_size * seq_dim, vector_dim)
+    
+    # Randomly subsample vectors to reduce size
+    total_vectors = vectors.shape[0]
+    subsample_indices = torch.randperm(total_vectors)[:subsample_size]
+    vectors_subsampled = vectors[subsample_indices]
+
+    # Normalize the subsampled vectors to unit length
+    vectors_norm = F.normalize(vectors_subsampled, p=2, dim=1)
+    
+    # Compute the cosine similarity matrix for the subsampled set
+    similarity_matrix = torch.matmul(vectors_norm, vectors_norm.T)
+    
+    # Zero out the diagonal (self-similarity) by subtracting it out
+    eye = torch.eye(vectors_subsampled.shape[0], device=vectors.device)
+    similarity_matrix = similarity_matrix - eye
+    
+    # Since we want to minimize similarity, we take the sum of all positive similarities
+    positive_similarities = torch.relu(similarity_matrix)
+    loss = positive_similarities.sum() / (vectors_subsampled.shape[0] * (vectors_subsampled.shape[0] - 1))
+
+    return loss
+
 
 def evaluate(encoder_model, decoder_model, eval_data, criterion,
              num_evals=1, print_predictions=True, samples_to_print=1):
@@ -58,7 +102,7 @@ def evaluate(encoder_model, decoder_model, eval_data, criterion,
 
     avg_loss = total_loss / min(batch_idx + 1, num_evals)
     accuracy = correct_predictions / total_predictions * 100
-    if not DEBUG:
+    if USE_WANDB:
         wandb.log({'eval_loss': avg_loss, 'eval_accuracy': accuracy})
     print(f'Evaluation - Loss: {avg_loss:.4f}, Accuracy: {accuracy:.2f}%')
 
@@ -77,6 +121,7 @@ def train(encoder_model, decoder_model, train_data, criterion,
         'loss_recon': [],
         'vq_loss': [],
         'commit_loss': [],
+        'diversity_loss': [],
     }
     for batch_idx, batch in enumerate(train_data):
         if batch_idx > max_steps:
@@ -109,19 +154,27 @@ def train(encoder_model, decoder_model, train_data, criterion,
         #make_dot(yhat, params=dict(list(encoder_model.named_parameters()) + list(decoder_model.named_parameters()))).render("rnn_torchviz", format="png")
         num_classes = reconstructed.shape[-1]
         loss_recon = criterion(reconstructed.view(-1, num_classes), batch.view(-1).long())
+        loss_div = diversity_loss(soft_preds)
         loss_vq = F.mse_loss(hard_preds, soft_preds.detach())
         loss_commit = F.mse_loss(soft_preds, hard_preds.detach())
-        loss = loss_recon + loss_vq + loss_commit
+        # TODO add loss weights
+        loss = loss_recon + loss_vq + loss_commit + loss_div
         loss.backward()
         torch.nn.utils.clip_grad_norm_(list(encoder_model.parameters()) + list(decoder_model.parameters()), 0.5)
         optimizer.step()
         if batch_idx % log_interval == 0:  # log_interval could be, e.g., 10
-            print(f'Batch: {batch_idx + start_step}, Loss: {loss.item()}, Recon loss: {loss_recon.item()}, VQ loss: {loss_vq.item()}, Commit loss: {loss_commit.item()}')
+            print(f'Batch: {batch_idx + start_step}, Loss: {loss.item()}, '
+                  f'Recon loss: {loss_recon.item()}, VQ loss: {loss_vq.item()}, Commit loss: {loss_commit.item()}, '
+                  f'Diversity loss: {loss_div.item()}')
             losses['loss_recon'].append(loss_recon.item())
             losses['vq_loss'].append(loss_vq.item())
             losses['commit_loss'].append(loss_commit.item())
-            if not DEBUG:
-                wandb.log({'train_loss_recon': loss_recon.item(), 'train_vq_loss': loss_vq.item(), 'train_commit_loss': loss_commit.item()})
+            losses['diversity_loss'].append(loss_div.item())
+            if USE_WANDB:
+                wandb.log({'train_loss_recon': loss_recon.item(),
+                           'train_vq_loss': loss_vq.item(),
+                           'train_commit_loss': loss_commit.item(),
+                           'train_diversity_loss': loss_div.item()})
     return {k: np.mean(v) for k, v in losses.items()}
 
 def main():
@@ -130,7 +183,8 @@ def main():
             # Load data
             'chunk_size':8, # Encode 8 bytes sequence length.
             'split_percentage':0.8, # Use 80% of data for training.
-            'batch_size':512,
+            'batch_size':8,
+            # model hypers
             'lr':1e-4,
             'ntokens':256,  # All bytes.
             'd_model':256,
@@ -149,6 +203,7 @@ def main():
             'split_percentage': 0.8, # Use 80% of data for training.
             'batch_size': 512,
             'lr': 1e-4,
+            # model hypers
             'ntokens': 256,  # All bytes.
             'd_model': 768,
             'd_hid': 768,  # dimension of the feedforward network model in ``nn.TransformerEncoder``
@@ -160,7 +215,7 @@ def main():
             'compression_factor': 2,
         }
     # start a new wandb run to track this script
-    if not DEBUG:
+    if USE_WANDB:
         wandb.init(
             # set the wandb project where this run will be logged
             project="rackitten-tokenizer",

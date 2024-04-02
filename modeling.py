@@ -52,6 +52,16 @@ class LearnedPositionEncoding(nn.Module):
         position_embeddings = position_embeddings.unsqueeze(axis=0)
         return x + position_embeddings
 
+def split(x, compression_factor):
+    tokens_to_take = int(x.shape[1] / compression_factor)
+    sub_x = x[:, :tokens_to_take, :]
+    assert sub_x.shape[-1] % 2 == 0
+    half1, half2 = sub_x.split(int(sub_x.shape[-1] / 2), dim=2)
+    half1_reshaped = half1.unsqueeze(2) 
+    half2_reshaped = half2.unsqueeze(2)
+    interleaved = torch.cat((half1_reshaped, half2_reshaped), dim=2)
+    interleaved = interleaved.view(x.shape[0], x.shape[1], int(x.shape[-1] / 2))
+    return interleaved
 
 class TransformerModel(nn.Module):
 
@@ -115,19 +125,12 @@ class TransformerModel(nn.Module):
             if self.compression_factor is not None:
                 assert self.compression_factor == 2
                 # Split and concat...
-                def split(x):
-                    tokens_to_take = int(x.shape[1] / self.compression_factor)
-                    sub_x = x[:, :tokens_to_take, :]
-                    assert sub_x.shape[-1] % 2 == 0
-                    half1, half2 = sub_x.split(int(sub_x.shape[-1] / 2), dim=2)
-                    half1_reshaped = half1.unsqueeze(2) 
-                    half2_reshaped = half2.unsqueeze(2)
-                    interleaved = torch.cat((half1_reshaped, half2_reshaped), dim=2)
-                    interleaved = interleaved.view(x.shape[0], x.shape[1], int(x.shape[-1] / 2))
-                    return interleaved
-                hard_output_st = split(hard_output_st)
-                hard_output = split(hard_output)
-                output = split(output)
+                hard_output_st = split(hard_output_st, self.compression_factor)
+                hard_output = split(hard_output, self.compression_factor)
+                output = split(output, self.compression_factor)
             return hard_output_st, hard_output, output # Return hard predictions and soft predictions
+        if self.compression_factor is not None:
+            assert self.compression_factor == 2
+            output = split(output, self.compression_factor)
         return output
 
