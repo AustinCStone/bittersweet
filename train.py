@@ -71,7 +71,7 @@ def evaluate(encoder_model, decoder_model, eval_data, criterion,
             batch = batch.to(device)
             T = batch.shape[1]  # Assuming T is the sequence length from inputs
 
-            hard_preds_st, _, _ = encoder_model(batch) 
+            hard_preds_st, _, _, _ = encoder_model(batch) 
             # latent = preds[:, -1, :]
             # Tile the mean prediction.
             # tiled_latent = latent 
@@ -167,8 +167,13 @@ def train(encoder_model, decoder_model, train_data, criterion,
             print(f'Batch: {batch_idx + start_step}, Loss: {loss.item()}, '
                   f'Recon loss: {loss_recon.item()}, VQ loss: {loss_vq.item()}, Commit loss: {loss_commit.item()}, '
                   f'Diversity loss: {loss_div.item()}')
-            print("Ground truth:", batch[0])
-            print("Latent prediction:", tokens[0])
+            if batch_idx % 100 == 0:
+                reconstructed_flat = reconstructed.view(-1, num_classes)
+                _, predicted_labels = torch.max(reconstructed_flat, 1)
+                predicted_labels_reshaped = predicted_labels.view(batch.shape[0], batch.shape[1])
+                print("Ground truth:", batch[0])
+                print("Latent prediction:", tokens[0])
+                print("Reconstructed prediction:", predicted_labels_reshaped[0])
             losses['loss_recon'].append(loss_recon.item())
             losses['vq_loss'].append(loss_vq.item())
             losses['commit_loss'].append(loss_commit.item())
@@ -189,7 +194,7 @@ def main():
             'batch_size':8,
             # model hypers
             'lr':1e-4,
-            'diversity_weight': 5.0,
+            'diversity_weight': 500.0,
             'ntokens':256,  # All bytes.
             'd_model':256,
             'd_hid':512,  # dimension of the feedforward network model in ``nn.TransformerEncoder``
@@ -207,15 +212,15 @@ def main():
             'split_percentage': 0.8, # Use 80% of data for training.
             'batch_size': 128,
             'lr': 1e-4,
-            'diversity_weight': 5.0,
+            'diversity_weight': 500.0,
             # model hypers
             'ntokens': 256,  # All bytes.
             'd_model': 512,
             'd_hid': 512,  # dimension of the feedforward network model in ``nn.TransformerEncoder``
             'nlayers':4,  # number of ``nn.TransformerEncoderLayer`` in ``nn.TransformerEncoder``
-            'nhead': 6,  # number of heads in ``nn.MultiheadAttention``
+            'nhead': 4,  # number of heads in ``nn.MultiheadAttention``
             'dropout': 0.2,  # dropout probability
-            'num_latent_vectors': 24_000,
+            'num_latent_vectors': 124_000,
             'use_bits': False,
             'compression_factor': 2,
         }
