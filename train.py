@@ -113,7 +113,8 @@ def evaluate(encoder_model, decoder_model, eval_data, criterion,
 
 
 def train(encoder_model, decoder_model, train_data, criterion,
-          optimizer, log_interval=1, max_steps=100, start_step=0):
+          optimizer, log_interval=1, max_steps=100, start_step=0,
+          diversity_weight=1.0):
     encoder_model.train()  # turn on train mode
     decoder_model.train()  # turn on train mode
     criterion = torch.nn.CrossEntropyLoss()
@@ -154,7 +155,7 @@ def train(encoder_model, decoder_model, train_data, criterion,
         #make_dot(yhat, params=dict(list(encoder_model.named_parameters()) + list(decoder_model.named_parameters()))).render("rnn_torchviz", format="png")
         num_classes = reconstructed.shape[-1]
         loss_recon = criterion(reconstructed.view(-1, num_classes), batch.view(-1).long())
-        loss_div = diversity_loss(soft_preds)
+        loss_div = diversity_loss(soft_preds) * diversity_weight
         loss_vq = F.mse_loss(hard_preds, soft_preds.detach())
         loss_commit = F.mse_loss(soft_preds, hard_preds.detach())
         # TODO add loss weights
@@ -186,6 +187,7 @@ def main():
             'batch_size':8,
             # model hypers
             'lr':1e-4,
+            'diversity_weight': 5.0,
             'ntokens':256,  # All bytes.
             'd_model':256,
             'd_hid':512,  # dimension of the feedforward network model in ``nn.TransformerEncoder``
@@ -203,6 +205,7 @@ def main():
             'split_percentage': 0.8, # Use 80% of data for training.
             'batch_size': 512,
             'lr': 1e-4,
+            'diversity_weight': 5.0,
             # model hypers
             'ntokens': 256,  # All bytes.
             'd_model': 768,
@@ -261,7 +264,8 @@ def main():
     for _ in range(1000):
         train_losses = train(encoder_model, decoder_model, train_data,
                              criterion=criterion, optimizer=optimizer,
-                             start_step=steps, max_steps=1000)
+                             start_step=steps, max_steps=1000,
+                             diversity_weight=config['diversity_weight'])
         steps += 1000
         avg_loss, accuracy = evaluate(encoder_model, decoder_model, eval_data,
                                       criterion=criterion)
