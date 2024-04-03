@@ -52,16 +52,22 @@ class LearnedPositionEncoding(nn.Module):
         position_embeddings = position_embeddings.unsqueeze(axis=0)
         return x + position_embeddings
 
-def split(x, compression_factor):
-    tokens_to_take = int(x.shape[1] / compression_factor)
-    sub_x = x[:, :tokens_to_take, :]
-    assert sub_x.shape[-1] % 2 == 0
-    half1, half2 = sub_x.split(int(sub_x.shape[-1] / 2), dim=2)
+def expand(x, compression_factor):
+    assert compression_factor == 2
+    half1, half2 = x.split(int(x.shape[-1] / compression_factor), dim=2)
     half1_reshaped = half1.unsqueeze(2) 
     half2_reshaped = half2.unsqueeze(2)
     interleaved = torch.cat((half1_reshaped, half2_reshaped), dim=2)
-    interleaved = interleaved.view(x.shape[0], x.shape[1], int(x.shape[-1] / 2))
+    interleaved = interleaved.view(x.shape[0], x.shape[1] * 2, int(x.shape[-1] / 2))
     return interleaved
+
+def average(x, compression_factor):
+    assert compression_factor == 2
+    # Reshape to group adjacent elements together
+    x = x.view(x.size(0), x.shape[1] // 2, 2, x.size(2))
+    # Compute the mean along the new dimension to average adjacent elements
+    average_x = x.mean(dim=2)
+    return average_x
 
 class TransformerModel(nn.Module):
 
@@ -121,17 +127,22 @@ class TransformerModel(nn.Module):
         if self.include_linear:
             output = self.linear(output)
         if self.use_vq:
-            hard_output_st, hard_output = self.codebook.straight_through(output)
-            tokens = self.codebook(output)
             if self.compression_factor is not None:
                 assert self.compression_factor == 2
-                # Split and concat...
-                hard_output_st = split(hard_output_st, self.compression_factor)
-                hard_output = split(hard_output, self.compression_factor)
-                output = split(output, self.compression_factor)
-            return hard_output_st, hard_output, output, tokens # Return hard predictions and soft predictions
+                output = average(output, self.compression_factor)
+                tokens = self.codebook(output)
+                hard_output_st, hard_output = self.codebook.straight_through(output)
+                hard_output_st = expand(hard_output_st, self.compression_factor)
+                hard_output = expand(hard_output, self.compression_factor)
+                output_expanded = expand(output, self.compression_factor)
+            else:
+                hard_output_st, hard_output = self.codebook.straight_through(output)
+                tokens = self.codebook(output)
+                output_expanded = output
+            return hard_output_st, hard_output, output, tokens, output_expanded # Return hard predictions and soft predictions
+
         if self.compression_factor is not None:
             assert self.compression_factor == 2
-            output = split(output, self.compression_factor)
+            output = average(output, self.compression_factor)
         return output
 

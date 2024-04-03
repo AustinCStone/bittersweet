@@ -71,7 +71,7 @@ def evaluate(encoder_model, decoder_model, eval_data, criterion,
             batch = batch.to(device)
             T = batch.shape[1]  # Assuming T is the sequence length from inputs
 
-            hard_preds_st, _, _, _ = encoder_model(batch) 
+            hard_preds_st, _, _, _, _ = encoder_model(batch) 
             # latent = preds[:, -1, :]
             # Tile the mean prediction.
             # tiled_latent = latent 
@@ -134,7 +134,7 @@ def train(encoder_model, decoder_model, train_data, criterion,
         # Input from batch is 0s and 1s of shape [batch_size, T]
         # Output shape should be [batch_size, T, d_model]
         optimizer.zero_grad()
-        hard_preds_st, hard_preds, soft_preds, tokens = encoder_model(batch) 
+        hard_preds_st, hard_preds, soft_preds, tokens, soft_preds_expanded = encoder_model(batch) 
         # Take the last prediction as the latent vector.
         # It should have shape [batch_size, d_model]
         #latent = tiled_latent = preds
@@ -156,8 +156,8 @@ def train(encoder_model, decoder_model, train_data, criterion,
         num_classes = reconstructed.shape[-1]
         loss_recon = criterion(reconstructed.view(-1, num_classes), batch.view(-1).long())
         loss_div = diversity_loss(soft_preds) * diversity_weight
-        loss_vq = F.mse_loss(hard_preds, soft_preds.detach())
-        loss_commit = F.mse_loss(soft_preds, hard_preds.detach())
+        loss_vq = F.mse_loss(hard_preds, soft_preds_expanded.detach())
+        loss_commit = F.mse_loss(soft_preds_expanded, hard_preds.detach())
         # TODO add loss weights
         loss = loss_recon + loss_vq + loss_commit + loss_div
         loss.backward()
@@ -194,7 +194,7 @@ def main():
             'batch_size':8,
             # model hypers
             'lr':1e-4,
-            'diversity_weight': 500.0,
+            'diversity_weight': 50.0,
             'ntokens':256,  # All bytes.
             'd_model':256,
             'd_hid':512,  # dimension of the feedforward network model in ``nn.TransformerEncoder``
@@ -212,7 +212,7 @@ def main():
             'split_percentage': 0.8, # Use 80% of data for training.
             'batch_size': 128,
             'lr': 1e-4,
-            'diversity_weight': 500.0,
+            'diversity_weight': 50.0,
             # model hypers
             'ntokens': 256,  # All bytes.
             'd_model': 512,
