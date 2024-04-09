@@ -1,4 +1,4 @@
-# pip install torch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 xformers==0.0.23post1 mwparserfromhell datasets
+# pip install torch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 xformers==0.0.23post1 mwparserfromhell datasets fast-pytorch-kmeans
 # wandb key: 4d89c43f67fc55f37cc6e65e9304ef29b1a454f3
 import torch
 import numpy as np
@@ -8,6 +8,7 @@ import torch.nn.functional as F
 import modeling
 import tqdm
 from sklearn.cluster import MiniBatchKMeans
+from fast_pytorch_kmeans import KMeans
 # from torchviz import make_dot
 import wandb
 
@@ -19,11 +20,12 @@ import torch
 import torch.nn.functional as F
 
 
-def kmeans_features(encoder_model, train_data, vocab_size, max_steps):
+def kmeans_features(encoder_model, train_data, vocab_size, max_gather_steps,
+                    max_kmeans_steps, torch_kmeans=False):
     encoder_model.eval()  # turn on train mode
     pred_vectors = []
     for batch_idx, batch in tqdm.tqdm(enumerate(train_data)):
-        if batch_idx > max_steps:
+        if batch_idx > max_gather_steps:
             break
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         batch = batch.to(device)
@@ -31,16 +33,22 @@ def kmeans_features(encoder_model, train_data, vocab_size, max_steps):
         soft_preds = soft_preds.view(-1, soft_preds.shape[-1])
         soft_preds = soft_preds.detach().cpu().numpy()
         pred_vectors.extend(soft_preds)
-    # Specify the number of clusters
-    print(f"Running mini batch kmeans on {len(pred_vectors)} vectors with {vocab_size} centroids...")
     n_clusters = vocab_size
-    # Initialize MiniBatchKMeans
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     start = time.time()
-    kmeans = MiniBatchKMeans(n_clusters=n_clusters, batch_size=10_000, random_state=42)
-    kmeans.fit(pred_vectors)
+    if not torch_kmeans:
+        print(f"Running mini batch kmeans on {len(pred_vectors)} vectors with {vocab_size} centroids...")
+        kmeans = MiniBatchKMeans(n_clusters=n_clusters, batch_size=10_000, random_state=42,
+                                max_iter=max_kmeans_steps)
+        kmeans.fit(pred_vectors)
+        centroids = kmeans.cluster_centers_
+    else:
+        print(f"Running torch kmeans on {len(pred_vectors)} vectors with {vocab_size} centroids...")
+        kmeans = KMeans(n_clusters=vocab_size, mode='euclidean', verbose=1, max_iter=max_kmeans_steps, device=device)
+        centroids = kmeans.fit_predict(torch.tensor(np.array(pred_vectors)).to(device))
     end = time.time()
     print(f"KMeans took {end - start} seconds.")
-    return kmeans.cluster_centers_
+    return torch.from_numpy(centroids).float().to(device)
 
 
 def diversity_loss(vectors, subsample_size=1000):
@@ -204,24 +212,26 @@ def main():
     if DEBUG:
         config = {
             # Load data
-            'chunk_size':60, # Encode 8 bytes sequence length.
+            'chunk_size': 60, # Encode 8 bytes sequence length.
             'split_percentage':0.8, # Use 80% of data for training.
             'batch_size':32,
             # model hypers
             'lr':1e-3,
-            'diversity_weight': 50.0,
+            'diversity_weight': 1.0,
             'ntokens':256,  # All bytes.
             'd_model': 300,
             'd_hid':512,  # dimension of the feedforward network model in ``nn.TransformerEncoder``
             'nlayers':4,  # number of ``nn.TransformerEncoderLayer`` in ``nn.TransformerEncoder``
             'nhead': 4,  # number of heads in ``nn.MultiheadAttention``
             'dropout': 0.2,  # dropout probability
-            'num_latent_vectors': 20_000,
+            'num_latent_vectors': 1000,
             'use_bits': False,
-            'compression_factor': 6,
+            'compression_factor': 2,
             'use_vq': False,
-            'steps_before_vq': 1,
-            'kmeans_gather_steps': 1000,
+            'steps_before_vq': 150,
+            'kmeans_gather_steps': 500,
+            'kmeans_steps': 25,
+            'eval_every': 100,
         }
     else:
         config = {
@@ -238,11 +248,13 @@ def main():
             'nlayers':4,  # number of ``nn.TransformerEncoderLayer`` in ``nn.TransformerEncoder``
             'nhead': 4,  # number of heads in ``nn.MultiheadAttention``
             'dropout': 0.2,  # dropout probability
-            'num_latent_vectors': 124_000,
+            'num_latent_vectors': 24_000,
             'use_bits': False,
             'compression_factor': 6,
             'steps_before_vq': 2000,
-            'kmeans_gather_steps': 10_000,
+            'kmeans_gather_steps': 500,
+            'kmeans_steps': 20,
+            'eval_every': 1000,
         }
     # start a new wandb run to track this script
     if USE_WANDB:
@@ -305,18 +317,19 @@ def main():
     init_codebook = kmeans_features(encoder_model=encoder_model,
                                     train_data=train_data,
                                     vocab_size=config['num_latent_vectors'],
-                                    max_steps=config['kmeans_gather_steps'])
+                                    max_gather_steps=config['kmeans_gather_steps'],
+                                    max_kmeans_steps=config['kmeans_steps'])
     encoder_model.use_vq = True
-    import ipdb; ipdb.set_trace()
+    encoder_model.set_codebook(init_codebook)
 
     steps = 0
     for _ in range(2): # Pretrain continuous
         train_losses = train(encoder_model, decoder_model, train_data,
                              criterion=criterion, optimizer=optimizer,
-                             start_step=steps, max_steps=1000,
+                             start_step=steps, max_steps=config['eval_every'],
                              diversity_weight=config['diversity_weight'],
                              use_vq=True)
-        steps += 1000
+        steps += config['eval_every']
         avg_loss, accuracy = evaluate(encoder_model, decoder_model, eval_data,
                                       criterion=criterion,
                                       use_vq=True)

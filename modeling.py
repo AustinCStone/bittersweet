@@ -145,6 +145,9 @@ class PoolExpandTransformerModel(nn.Module):
             self.embedding.to(device)
         self.init_weights()
 
+    def set_codebook(self, codebook_weights):
+        self.codebook.embedding.weight.data = codebook_weights
+
     def init_weights(self) -> None:
         initrange = 0.1
         if not self.vector_input:
