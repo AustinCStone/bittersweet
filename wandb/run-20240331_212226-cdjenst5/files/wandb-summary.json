@@ -1,1 +1,0 @@
-{"train_loss_recon": 3.087017297744751, "train_vq_loss": 1.01845121383667, "train_commit_loss": 1.01845121383667, "_timestamp": 1711945780.461051, "_runtime": 433.55780386924744, "_step": 133, "_wandb": {"runtime": 436}}
