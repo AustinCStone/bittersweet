@@ -1,0 +1,1170 @@
+2024-03-31 21:22:26,911 INFO    StreamThr :37515 [internal.py:wandb_internal():86] W&B internal server running at pid: 37515, started at: 2024-03-31 21:22:26.902825
+2024-03-31 21:22:26,914 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status
+2024-03-31 21:22:26,916 INFO    WriterThread:37515 [datastore.py:open_for_write():87] open: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/run-cdjenst5.wandb
+2024-03-31 21:22:26,919 DEBUG   SenderThread:37515 [sender.py:send():379] send: header
+2024-03-31 21:22:26,945 DEBUG   SenderThread:37515 [sender.py:send():379] send: run
+2024-03-31 21:22:27,239 INFO    SenderThread:37515 [dir_watcher.py:__init__():211] watching files in: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files
+2024-03-31 21:22:27,239 INFO    SenderThread:37515 [sender.py:_start_run_threads():1124] run started: cdjenst5 with start time 1711945346.903247
+2024-03-31 21:22:27,262 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: check_version
+2024-03-31 21:22:27,262 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: check_version
+2024-03-31 21:22:27,386 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: run_start
+2024-03-31 21:22:27,396 DEBUG   HandlerThread:37515 [system_info.py:__init__():26] System info init
+2024-03-31 21:22:27,396 DEBUG   HandlerThread:37515 [system_info.py:__init__():41] System info init done
+2024-03-31 21:22:27,396 INFO    HandlerThread:37515 [system_monitor.py:start():194] Starting system monitor
+2024-03-31 21:22:27,396 INFO    SystemMonitor:37515 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2024-03-31 21:22:27,396 INFO    HandlerThread:37515 [system_monitor.py:probe():214] Collecting system info
+2024-03-31 21:22:27,399 INFO    SystemMonitor:37515 [interfaces.py:start():190] Started cpu monitoring
+2024-03-31 21:22:27,399 DEBUG   HandlerThread:37515 [system_info.py:probe():150] Probing system
+2024-03-31 21:22:27,399 INFO    SystemMonitor:37515 [interfaces.py:start():190] Started disk monitoring
+2024-03-31 21:22:27,405 INFO    SystemMonitor:37515 [interfaces.py:start():190] Started gpuapple monitoring
+2024-03-31 21:22:27,407 INFO    SystemMonitor:37515 [interfaces.py:start():190] Started memory monitoring
+2024-03-31 21:22:27,408 INFO    SystemMonitor:37515 [interfaces.py:start():190] Started network monitoring
+2024-03-31 21:22:27,414 DEBUG   HandlerThread:37515 [system_info.py:_probe_git():135] Probing git
+2024-03-31 21:22:27,441 DEBUG   HandlerThread:37515 [system_info.py:_probe_git():143] Probing git done
+2024-03-31 21:22:27,441 DEBUG   HandlerThread:37515 [system_info.py:probe():198] Probing system done
+2024-03-31 21:22:27,441 DEBUG   HandlerThread:37515 [system_monitor.py:probe():223] {'os': 'macOS-14.2.1-arm64-arm-64bit', 'python': '3.9.6', 'heartbeatAt': '2024-04-01T04:22:27.399931', 'startedAt': '2024-04-01T04:22:26.891943', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': '/Users/austinstone/bittersweet/train.py', 'codePathLocal': 'train.py', 'codePath': 'train.py', 'git': {'remote': 'git@github.com:AustinCStone/bittersweet.git', 'commit': 'fa9047663a1c1cd6e84fc8f7c9a7cecdbc6be1c6'}, 'email': 'austinstone@utexas.edu', 'root': '/Users/austinstone/bittersweet', 'host': 'Austins-MacBook-Air.local', 'username': 'austinstone', 'executable': '/Library/Developer/CommandLineTools/usr/bin/python3', 'cpu_count': 8, 'cpu_count_logical': 8, 'cpu_freq': {'current': 3204, 'min': 600, 'max': 3204}, 'cpu_freq_per_core': [{'current': 3204, 'min': 600, 'max': 3204}], 'disk': {'/': {'total': 460.4317207336426, 'used': 9.42599868774414}}, 'gpuapple': {'type': 'arm', 'vendor': 'Apple'}, 'memory': {'total': 16.0}}
+2024-03-31 21:22:27,441 INFO    HandlerThread:37515 [system_monitor.py:probe():224] Finished collecting system info
+2024-03-31 21:22:27,441 INFO    HandlerThread:37515 [system_monitor.py:probe():227] Publishing system info
+2024-03-31 21:22:27,442 INFO    HandlerThread:37515 [system_monitor.py:probe():229] Finished publishing system info
+2024-03-31 21:22:27,444 DEBUG   SenderThread:37515 [sender.py:send():379] send: files
+2024-03-31 21:22:27,444 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-metadata.json with policy now
+2024-03-31 21:22:27,491 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: python_packages
+2024-03-31 21:22:27,492 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: python_packages
+2024-03-31 21:22:27,492 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-31 21:22:27,492 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: stop_status
+2024-03-31 21:22:27,494 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-31 21:22:27,734 DEBUG   SenderThread:37515 [sender.py:send():379] send: telemetry
+2024-03-31 21:22:27,950 INFO    wandb-upload_0:37515 [upload_job.py:push():131] Uploaded file /var/folders/70/w63jf9896tq2j0s093fx1r440000gn/T/tmp89rwqx4rwandb/9meqxqdh-wandb-metadata.json
+2024-03-31 21:22:28,240 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_created():271] file/dir created: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/requirements.txt
+2024-03-31 21:22:28,240 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_created():271] file/dir created: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-metadata.json
+2024-03-31 21:22:32,749 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:22:32,955 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:22:32,957 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:22:32,957 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:22:32,960 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:22:33,258 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_created():271] file/dir created: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:22:33,259 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_created():271] file/dir created: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:22:35,267 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:22:36,095 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:22:36,096 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:22:36,096 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:22:36,097 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:22:36,272 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:22:37,278 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:22:38,101 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:22:38,572 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:22:38,573 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:22:38,573 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:22:38,574 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:22:39,284 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:22:41,216 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:22:41,217 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:22:41,218 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:22:41,218 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:22:41,293 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:22:41,294 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:22:42,495 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-31 21:22:42,496 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-31 21:22:42,497 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: stop_status
+2024-03-31 21:22:43,305 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:22:43,697 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:22:44,191 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:22:44,193 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:22:44,193 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:22:44,193 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:22:44,309 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:22:45,329 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:22:47,953 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:22:47,953 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:22:47,954 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:22:47,956 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:22:48,337 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:22:48,961 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:22:49,342 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:22:50,945 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:22:50,946 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:22:50,946 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:22:50,948 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:22:51,353 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:22:53,359 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:22:53,758 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:22:53,759 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:22:53,760 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:22:53,760 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:22:54,368 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:22:54,766 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:22:55,370 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:22:56,399 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:22:56,401 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:22:56,401 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:22:56,402 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:22:57,382 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:22:57,382 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:22:57,498 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-31 21:22:57,499 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-31 21:22:57,499 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: stop_status
+2024-03-31 21:22:59,832 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:22:59,833 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:22:59,964 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:22:59,964 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:22:59,967 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:23:00,392 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/config.yaml
+2024-03-31 21:23:00,393 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:23:01,392 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:23:03,358 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:23:03,360 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:23:03,360 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:23:03,361 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:23:03,401 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:23:05,371 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:23:05,409 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:23:07,445 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:23:07,447 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:23:07,447 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:23:07,450 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:23:08,426 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:23:09,428 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:23:10,461 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:23:11,627 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:23:11,628 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:23:11,628 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:23:11,629 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:23:12,444 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:23:12,498 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-31 21:23:12,499 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: stop_status
+2024-03-31 21:23:12,501 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-31 21:23:13,449 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:23:14,292 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:23:14,293 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:23:14,293 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:23:14,293 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:23:14,454 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:23:15,457 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:23:16,303 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:23:16,877 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:23:16,879 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:23:16,879 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:23:16,880 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:23:17,469 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:23:19,379 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:23:19,380 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:23:19,380 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:23:19,380 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:23:19,479 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:23:19,479 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:23:21,389 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:23:21,489 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:23:22,145 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:23:22,146 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:23:22,146 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:23:22,146 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:23:22,493 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:23:23,498 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:23:24,962 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:23:24,963 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:23:24,963 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:23:24,964 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:23:25,506 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:23:26,973 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:23:27,405 DEBUG   SystemMonitor:37515 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2024-03-31 21:23:27,408 DEBUG   SenderThread:37515 [sender.py:send():379] send: telemetry
+2024-03-31 21:23:27,408 DEBUG   SenderThread:37515 [sender.py:send():379] send: stats
+2024-03-31 21:23:27,503 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-31 21:23:27,504 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: stop_status
+2024-03-31 21:23:27,507 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-31 21:23:27,517 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:23:27,587 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:23:27,677 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:23:27,677 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:23:27,678 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:23:28,522 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:23:29,528 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:23:30,323 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:23:30,324 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:23:30,324 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:23:30,325 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:23:30,532 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:23:31,534 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:23:32,339 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:23:33,466 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:23:33,800 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:23:33,801 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:23:33,803 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:23:34,555 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/config.yaml
+2024-03-31 21:23:34,556 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:23:35,558 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:23:37,785 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:23:37,786 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:23:37,787 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:23:37,787 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:23:38,572 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:23:39,573 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:23:39,795 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:23:40,781 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:23:40,782 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:23:40,782 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:23:40,783 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:23:41,584 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:23:41,585 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:23:42,509 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-31 21:23:42,509 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-31 21:23:42,510 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: stop_status
+2024-03-31 21:23:44,007 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:23:44,008 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:23:44,008 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:23:44,010 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:23:44,592 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:23:45,014 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:23:45,598 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:23:48,572 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:23:48,575 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:23:48,575 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:23:48,576 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:23:48,614 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:23:49,617 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:23:50,585 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:23:51,951 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:23:51,952 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:23:51,953 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:23:51,953 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:23:52,634 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:23:53,641 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:23:55,964 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:23:57,412 DEBUG   SenderThread:37515 [sender.py:send():379] send: stats
+2024-03-31 21:23:57,511 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-31 21:23:57,511 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: stop_status
+2024-03-31 21:23:57,514 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-31 21:23:57,554 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:23:57,624 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:23:57,625 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:23:57,626 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:23:57,659 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:23:59,667 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:24:01,042 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:24:01,043 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:24:01,043 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:24:01,044 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:24:01,045 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:24:01,678 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:24:01,679 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:24:05,937 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:24:05,938 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:24:05,939 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:24:05,939 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:24:06,701 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:24:06,945 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:24:07,707 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:24:09,272 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:24:09,273 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:24:09,273 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:24:09,276 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:24:09,713 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:24:11,723 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:24:12,286 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:24:12,513 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:24:12,514 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:24:12,514 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:24:12,515 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:24:12,522 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-31 21:24:12,522 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-31 21:24:12,522 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: stop_status
+2024-03-31 21:24:12,728 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:24:13,732 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:24:16,790 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:24:16,792 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:24:16,792 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:24:16,794 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:24:17,748 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:24:17,748 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:24:17,797 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:24:20,569 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:24:20,570 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:24:20,571 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:24:20,574 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:24:20,754 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:24:21,760 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:24:23,589 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:24:24,513 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:24:24,514 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:24:24,514 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:24:24,515 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:24:24,769 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:24:25,770 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:24:27,417 DEBUG   SenderThread:37515 [sender.py:send():379] send: stats
+2024-03-31 21:24:27,434 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:24:27,436 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:24:27,436 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:24:27,437 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:24:27,516 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-31 21:24:27,517 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: stop_status
+2024-03-31 21:24:27,522 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-31 21:24:27,776 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:24:28,696 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:24:29,786 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:24:30,480 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:24:30,481 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:24:30,481 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:24:30,482 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:24:30,792 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:24:31,798 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:24:33,508 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:24:33,509 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:24:33,509 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:24:33,510 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:24:33,804 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:24:34,514 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:24:35,810 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:24:36,134 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:24:36,135 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:24:36,135 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:24:36,136 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:24:36,816 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:24:37,822 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:24:38,835 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:24:38,836 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:24:38,836 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:24:38,838 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:24:39,832 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:24:39,832 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:24:39,841 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:24:41,564 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:24:41,565 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:24:41,565 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:24:41,567 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:24:41,839 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:24:42,520 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-31 21:24:42,520 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: stop_status
+2024-03-31 21:24:42,526 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-31 21:24:43,851 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:24:44,521 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:24:44,522 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:24:44,522 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:24:44,524 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:24:44,855 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:24:45,529 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:24:45,856 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:24:47,241 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:24:47,243 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:24:47,243 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:24:47,245 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:24:47,866 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:24:49,868 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:24:49,870 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:24:49,870 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:24:49,871 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:24:49,875 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:24:49,875 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:24:50,874 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:24:51,886 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:24:52,717 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:24:52,718 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:24:52,719 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:24:52,720 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:24:52,891 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:24:53,896 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:24:55,389 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:24:55,390 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:24:55,390 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:24:55,391 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:24:55,908 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:24:56,397 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:24:57,421 DEBUG   SenderThread:37515 [sender.py:send():379] send: stats
+2024-03-31 21:24:57,525 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-31 21:24:57,526 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: stop_status
+2024-03-31 21:24:57,531 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-31 21:24:57,919 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:24:58,181 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:24:58,182 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:24:58,183 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:24:58,183 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:24:58,925 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:24:59,930 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:25:00,882 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:25:00,884 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:25:00,884 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:25:00,885 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:25:00,936 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:25:01,889 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:25:01,941 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:25:03,787 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:25:03,788 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:25:03,788 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:25:03,790 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:25:03,951 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:25:05,961 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:25:06,593 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:25:06,594 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:25:06,595 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:25:06,595 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:25:06,966 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:25:07,601 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:25:07,969 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:25:09,183 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:25:09,185 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:25:09,185 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:25:09,186 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:25:09,980 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:25:09,981 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:25:11,609 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:25:11,610 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:25:11,610 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:25:11,612 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:25:11,986 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:25:12,529 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-31 21:25:12,530 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: stop_status
+2024-03-31 21:25:12,535 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-31 21:25:12,750 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:25:13,997 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:25:14,022 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:25:14,022 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:25:14,023 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:25:14,025 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:25:15,002 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:25:16,008 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:25:16,815 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:25:16,817 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:25:16,817 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:25:16,818 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:25:17,013 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:25:17,822 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:25:18,015 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:25:20,794 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:25:20,801 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:25:20,801 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:25:20,803 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:25:21,024 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:25:22,031 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:25:23,811 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:25:24,541 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:25:24,543 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:25:24,543 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:25:24,546 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:25:25,041 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:25:26,044 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:25:27,424 DEBUG   SenderThread:37515 [sender.py:send():379] send: stats
+2024-03-31 21:25:27,533 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-31 21:25:27,533 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: stop_status
+2024-03-31 21:25:27,539 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-31 21:25:27,675 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:25:27,681 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:25:27,682 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:25:27,682 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:25:28,054 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:25:29,688 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:25:30,063 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:25:30,984 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:25:30,986 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:25:30,986 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:25:30,987 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:25:31,069 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:25:33,727 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:25:33,729 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:25:33,729 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:25:33,729 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:25:34,085 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:25:34,085 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:25:34,734 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:25:36,087 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:25:36,276 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:25:36,277 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:25:36,277 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:25:36,278 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:25:37,092 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:25:38,097 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:25:38,740 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:25:38,741 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:25:38,741 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:25:38,742 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:25:39,103 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:25:39,746 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:25:40,108 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:25:41,205 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:25:41,206 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:25:41,206 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:25:41,207 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:25:42,116 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:25:42,532 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-31 21:25:42,533 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: stop_status
+2024-03-31 21:25:42,539 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-31 21:25:43,823 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:25:43,824 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:25:43,824 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:25:43,824 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:25:44,123 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:25:44,123 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:25:44,830 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:25:46,134 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:25:46,221 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:25:46,221 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:25:46,221 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:25:46,222 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:25:47,140 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:25:48,145 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:25:48,974 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:25:48,975 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:25:48,975 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:25:48,976 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:25:49,150 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:25:49,981 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:25:50,156 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:25:51,577 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:25:51,578 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:25:51,578 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:25:51,580 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:25:52,169 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:25:54,176 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:25:54,259 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:25:54,260 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:25:54,261 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:25:54,261 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:25:55,181 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:25:55,267 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:25:56,187 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:25:57,040 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:25:57,042 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:25:57,042 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:25:57,043 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:25:57,192 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:25:57,428 DEBUG   SenderThread:37515 [sender.py:send():379] send: stats
+2024-03-31 21:25:57,537 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-31 21:25:57,537 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: stop_status
+2024-03-31 21:25:57,542 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-31 21:25:58,198 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:25:59,952 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:25:59,953 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:25:59,953 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:25:59,954 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:26:00,207 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:26:00,958 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:26:02,216 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:26:02,829 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:26:02,830 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:26:02,831 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:26:02,831 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:26:03,221 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:26:04,226 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:26:05,223 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:26:05,226 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:26:05,226 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:26:05,227 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:26:05,232 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:26:06,231 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:26:06,235 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:26:08,392 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:26:08,393 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:26:08,393 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:26:08,395 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:26:09,247 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:26:10,252 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:26:11,057 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:26:11,059 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:26:11,059 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:26:11,059 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:26:11,255 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:26:12,065 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:26:12,259 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:26:12,541 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-31 21:26:12,541 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: stop_status
+2024-03-31 21:26:12,547 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-31 21:26:14,035 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:26:14,036 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:26:14,037 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:26:14,037 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:26:14,269 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:26:16,278 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:26:16,442 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:26:16,443 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:26:16,443 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:26:16,444 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:26:17,285 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:26:17,447 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:26:18,290 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:26:18,873 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:26:18,874 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:26:18,874 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:26:18,875 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:26:19,295 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:26:20,297 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:26:21,449 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:26:21,450 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:26:21,450 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:26:21,451 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:26:22,307 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:26:22,456 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:26:24,315 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:26:25,305 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:26:25,306 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:26:25,306 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:26:25,307 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:26:25,317 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:26:26,322 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:26:27,434 DEBUG   SenderThread:37515 [sender.py:send():379] send: stats
+2024-03-31 21:26:27,546 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-31 21:26:27,546 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: stop_status
+2024-03-31 21:26:27,549 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-31 21:26:27,700 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:26:28,404 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:26:28,405 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:26:28,406 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:26:28,406 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:26:29,337 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:26:30,342 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:26:31,481 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:26:31,483 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:26:31,483 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:26:31,484 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:26:32,348 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:26:33,494 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:26:34,353 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:26:35,313 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:26:35,316 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:26:35,317 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:26:35,318 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:26:35,359 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:26:36,360 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:26:38,986 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:26:38,987 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:26:38,988 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:26:38,988 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:26:38,990 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:26:39,376 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:26:40,379 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:26:42,294 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:26:42,295 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:26:42,296 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:26:42,297 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:26:42,386 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:26:42,547 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-31 21:26:42,549 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-31 21:26:42,550 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: stop_status
+2024-03-31 21:26:44,390 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:26:44,660 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:26:45,142 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:26:45,143 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:26:45,144 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:26:45,144 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:26:45,395 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:26:46,401 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:26:48,113 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:26:48,117 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:26:48,117 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:26:48,118 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:26:48,412 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:26:50,126 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:26:50,424 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:26:51,738 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:26:51,739 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:26:51,739 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:26:51,739 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:26:52,429 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:26:54,440 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:26:54,840 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:26:54,841 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:26:54,842 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:26:54,842 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:26:55,443 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:26:55,847 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:26:56,448 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:26:57,440 DEBUG   SenderThread:37515 [sender.py:send():379] send: stats
+2024-03-31 21:26:57,552 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-31 21:26:57,553 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-31 21:26:57,554 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: stop_status
+2024-03-31 21:26:58,429 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:26:58,429 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:26:58,430 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:26:58,430 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:26:58,455 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:27:00,463 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:27:01,444 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:27:01,814 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:27:01,815 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:27:01,816 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:27:01,817 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:27:02,472 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:27:04,480 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:27:05,575 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:27:05,577 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:27:05,577 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:27:05,578 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:27:06,486 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:27:06,584 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:27:08,494 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:27:09,081 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:27:09,083 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:27:09,083 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:27:09,084 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:27:09,499 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:27:10,505 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:27:12,094 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:27:12,555 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-31 21:27:12,557 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-31 21:27:12,557 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: stop_status
+2024-03-31 21:27:12,948 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:27:12,949 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:27:12,949 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:27:12,950 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:27:13,517 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:27:14,524 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:27:17,158 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:27:17,159 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:27:17,159 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:27:17,159 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:27:17,160 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:27:17,531 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:27:18,536 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:27:21,626 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:27:21,629 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:27:21,629 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:27:21,630 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:27:22,551 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:27:22,635 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:27:24,557 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:27:25,454 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:27:25,454 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:27:25,455 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:27:25,455 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:27:25,563 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:27:27,444 DEBUG   SenderThread:37515 [sender.py:send():379] send: stats
+2024-03-31 21:27:27,558 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-31 21:27:27,558 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: stop_status
+2024-03-31 21:27:27,559 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-31 21:27:27,705 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:27:28,577 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:27:29,295 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:27:29,296 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:27:29,296 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:27:29,297 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:27:29,582 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:27:30,589 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:27:33,322 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:27:34,089 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:27:34,091 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:27:34,091 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:27:34,094 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:27:34,606 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:27:36,617 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:27:38,175 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:27:38,177 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:27:38,177 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:27:38,178 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:27:38,654 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:27:39,184 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:27:40,655 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:27:41,513 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:27:41,514 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:27:41,514 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:27:41,515 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:27:41,660 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:27:42,562 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-31 21:27:42,563 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-31 21:27:42,563 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: stop_status
+2024-03-31 21:27:44,347 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:27:44,348 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:27:44,348 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:27:44,348 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:27:44,349 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:27:44,675 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:27:44,675 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:27:46,678 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:27:46,812 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:27:46,814 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:27:46,814 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:27:46,815 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:27:47,681 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:27:48,687 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:27:49,265 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:27:49,266 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:27:49,267 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:27:49,269 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:27:49,692 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:27:50,272 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:27:50,698 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:27:51,846 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:27:51,847 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:27:51,847 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:27:51,849 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:27:52,708 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:27:54,623 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:27:54,624 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:27:54,624 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:27:54,625 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:27:54,716 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:27:54,717 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:27:55,630 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:27:56,727 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:27:57,035 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:27:57,035 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:27:57,036 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:27:57,036 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:27:57,448 DEBUG   SenderThread:37515 [sender.py:send():379] send: stats
+2024-03-31 21:27:57,562 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-31 21:27:57,563 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: stop_status
+2024-03-31 21:27:57,567 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-31 21:27:57,733 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:27:58,738 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:27:59,372 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:27:59,373 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:27:59,373 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:27:59,373 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:27:59,738 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:28:00,744 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:28:01,384 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:28:01,922 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:28:01,923 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:28:01,923 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:28:01,924 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:28:02,752 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:28:04,598 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:28:04,599 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:28:04,600 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:28:04,600 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:28:04,762 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:28:04,763 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:28:06,607 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:28:06,773 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:28:06,978 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:28:06,979 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:28:06,979 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:28:06,980 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:28:07,779 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:28:08,781 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:28:09,530 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:28:09,531 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:28:09,532 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:28:09,532 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:28:09,784 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:28:10,788 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:28:12,544 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:28:12,569 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-31 21:28:12,570 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: stop_status
+2024-03-31 21:28:12,573 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-31 21:28:12,585 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:28:12,832 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:28:12,832 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:28:12,833 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:28:13,804 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:28:14,810 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:28:15,467 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:28:15,469 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:28:15,469 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:28:15,469 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:28:15,814 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:28:16,819 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:28:18,102 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:28:18,103 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:28:18,104 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:28:18,104 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:28:18,106 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:28:18,829 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:28:20,837 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:28:20,942 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:28:20,943 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:28:20,943 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:28:20,945 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:28:21,840 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:28:22,845 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:28:23,784 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:28:23,785 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:28:23,786 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:28:23,786 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:28:23,787 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:28:23,847 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:28:26,814 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:28:26,816 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:28:26,816 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:28:26,817 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:28:26,860 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:28:26,860 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:28:27,455 DEBUG   SenderThread:37515 [sender.py:send():379] send: stats
+2024-03-31 21:28:27,570 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-31 21:28:27,570 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: stop_status
+2024-03-31 21:28:27,576 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-31 21:28:28,870 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:28:29,494 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:28:29,495 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:28:29,496 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:28:29,496 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:28:29,497 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:28:29,876 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:28:32,508 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:28:32,509 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:28:32,509 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:28:32,510 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:28:32,887 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:28:32,887 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:28:34,520 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:28:34,896 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:28:36,327 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:28:36,328 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:28:36,329 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:28:36,330 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:28:36,904 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:28:38,911 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:28:40,344 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:28:40,464 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:28:40,466 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:28:40,466 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:28:40,466 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:28:40,919 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:28:42,570 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-31 21:28:42,570 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: stop_status
+2024-03-31 21:28:42,579 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-31 21:28:42,925 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:28:43,858 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:28:43,859 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:28:43,860 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:28:43,861 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:28:43,931 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:28:45,870 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:28:46,942 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:28:48,140 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:28:48,142 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:28:48,143 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:28:48,146 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:28:48,952 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:28:49,954 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:28:51,156 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:28:52,558 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:28:52,559 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:28:52,560 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:28:52,561 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:28:52,970 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:28:53,971 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:28:56,138 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:28:56,139 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:28:56,140 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:28:56,142 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:28:56,986 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:28:57,148 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:28:57,455 DEBUG   SenderThread:37515 [sender.py:send():379] send: stats
+2024-03-31 21:28:57,574 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-31 21:28:57,575 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: stop_status
+2024-03-31 21:28:57,580 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-31 21:28:57,992 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:28:59,559 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:28:59,560 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:28:59,561 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:28:59,562 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:29:00,002 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:29:00,003 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:29:02,573 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:29:04,787 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:29:04,788 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:29:04,788 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:29:04,789 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:29:05,021 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:29:06,024 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:29:07,801 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:29:09,812 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:29:09,814 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:29:09,814 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:29:09,815 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:29:10,037 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:29:12,046 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:29:12,579 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-31 21:29:12,579 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: stop_status
+2024-03-31 21:29:12,583 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-31 21:29:13,696 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:29:13,858 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:29:13,859 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:29:13,859 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:29:13,860 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:29:14,052 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:29:16,062 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:29:17,805 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:29:17,806 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:29:17,806 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:29:17,807 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:29:18,073 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:29:18,813 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:29:20,084 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:29:22,015 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:29:22,016 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:29:22,016 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:29:22,017 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:29:22,091 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:29:24,022 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:29:24,101 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:29:26,337 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:29:26,339 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:29:26,339 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:29:26,340 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:29:27,109 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:29:27,458 DEBUG   SenderThread:37515 [sender.py:send():379] send: stats
+2024-03-31 21:29:27,583 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-31 21:29:27,585 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-31 21:29:27,586 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: stop_status
+2024-03-31 21:29:28,114 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:29:29,830 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:29:30,257 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:29:30,259 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:29:30,259 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:29:30,261 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:29:31,132 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:29:32,138 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:29:33,781 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:29:33,782 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:29:33,782 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:29:33,783 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:29:34,149 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:29:34,149 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:29:35,794 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:29:37,357 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:29:37,358 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:29:37,358 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:29:37,359 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:29:38,163 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:29:38,164 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:29:40,462 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-31 21:29:40,463 DEBUG   SenderThread:37515 [sender.py:send():379] send: history
+2024-03-31 21:29:40,463 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: summary_record
+2024-03-31 21:29:40,464 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:29:41,181 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:29:41,470 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:29:42,188 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:29:42,586 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-31 21:29:42,586 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-31 21:29:42,587 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: stop_status
+2024-03-31 21:29:43,651 DEBUG   SenderThread:37515 [sender.py:send():379] send: exit
+2024-03-31 21:29:43,652 INFO    SenderThread:37515 [sender.py:send_exit():586] handling exit code: 255
+2024-03-31 21:29:43,652 INFO    SenderThread:37515 [sender.py:send_exit():588] handling runtime: 436
+2024-03-31 21:29:43,653 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:29:43,653 INFO    SenderThread:37515 [sender.py:send_exit():594] send defer
+2024-03-31 21:29:43,653 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: defer
+2024-03-31 21:29:43,653 INFO    HandlerThread:37515 [handler.py:handle_request_defer():172] handle defer: 0
+2024-03-31 21:29:43,653 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: defer
+2024-03-31 21:29:43,653 INFO    SenderThread:37515 [sender.py:send_request_defer():610] handle sender defer: 0
+2024-03-31 21:29:43,654 INFO    SenderThread:37515 [sender.py:transition_state():614] send defer: 1
+2024-03-31 21:29:43,654 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: defer
+2024-03-31 21:29:43,654 INFO    HandlerThread:37515 [handler.py:handle_request_defer():172] handle defer: 1
+2024-03-31 21:29:43,654 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: defer
+2024-03-31 21:29:43,654 INFO    SenderThread:37515 [sender.py:send_request_defer():610] handle sender defer: 1
+2024-03-31 21:29:43,654 INFO    SenderThread:37515 [sender.py:transition_state():614] send defer: 2
+2024-03-31 21:29:43,654 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: defer
+2024-03-31 21:29:43,654 INFO    HandlerThread:37515 [handler.py:handle_request_defer():172] handle defer: 2
+2024-03-31 21:29:43,654 INFO    HandlerThread:37515 [system_monitor.py:finish():203] Stopping system monitor
+2024-03-31 21:29:43,654 DEBUG   SystemMonitor:37515 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2024-03-31 21:29:43,655 INFO    HandlerThread:37515 [interfaces.py:finish():202] Joined cpu monitor
+2024-03-31 21:29:43,655 DEBUG   SystemMonitor:37515 [system_monitor.py:_start():183] Publishing last batch of metrics
+2024-03-31 21:29:43,655 INFO    HandlerThread:37515 [interfaces.py:finish():202] Joined disk monitor
+2024-03-31 21:29:43,656 INFO    HandlerThread:37515 [interfaces.py:finish():202] Joined gpuapple monitor
+2024-03-31 21:29:43,656 INFO    HandlerThread:37515 [interfaces.py:finish():202] Joined memory monitor
+2024-03-31 21:29:43,656 INFO    HandlerThread:37515 [interfaces.py:finish():202] Joined network monitor
+2024-03-31 21:29:43,657 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: defer
+2024-03-31 21:29:43,657 INFO    SenderThread:37515 [sender.py:send_request_defer():610] handle sender defer: 2
+2024-03-31 21:29:43,657 INFO    SenderThread:37515 [sender.py:transition_state():614] send defer: 3
+2024-03-31 21:29:43,657 DEBUG   SenderThread:37515 [sender.py:send():379] send: stats
+2024-03-31 21:29:43,657 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: defer
+2024-03-31 21:29:43,657 INFO    HandlerThread:37515 [handler.py:handle_request_defer():172] handle defer: 3
+2024-03-31 21:29:43,658 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: defer
+2024-03-31 21:29:43,658 INFO    SenderThread:37515 [sender.py:send_request_defer():610] handle sender defer: 3
+2024-03-31 21:29:43,658 INFO    SenderThread:37515 [sender.py:transition_state():614] send defer: 4
+2024-03-31 21:29:43,658 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: defer
+2024-03-31 21:29:43,658 INFO    HandlerThread:37515 [handler.py:handle_request_defer():172] handle defer: 4
+2024-03-31 21:29:43,658 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: defer
+2024-03-31 21:29:43,658 INFO    SenderThread:37515 [sender.py:send_request_defer():610] handle sender defer: 4
+2024-03-31 21:29:43,658 INFO    SenderThread:37515 [sender.py:transition_state():614] send defer: 5
+2024-03-31 21:29:43,658 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: defer
+2024-03-31 21:29:43,658 INFO    HandlerThread:37515 [handler.py:handle_request_defer():172] handle defer: 5
+2024-03-31 21:29:43,659 DEBUG   SenderThread:37515 [sender.py:send():379] send: summary
+2024-03-31 21:29:43,659 INFO    SenderThread:37515 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-31 21:29:43,659 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: defer
+2024-03-31 21:29:43,659 INFO    SenderThread:37515 [sender.py:send_request_defer():610] handle sender defer: 5
+2024-03-31 21:29:43,660 INFO    SenderThread:37515 [sender.py:transition_state():614] send defer: 6
+2024-03-31 21:29:43,660 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: defer
+2024-03-31 21:29:43,660 INFO    HandlerThread:37515 [handler.py:handle_request_defer():172] handle defer: 6
+2024-03-31 21:29:43,660 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: defer
+2024-03-31 21:29:43,660 INFO    SenderThread:37515 [sender.py:send_request_defer():610] handle sender defer: 6
+2024-03-31 21:29:43,660 INFO    SenderThread:37515 [sender.py:transition_state():614] send defer: 7
+2024-03-31 21:29:43,660 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: status_report
+2024-03-31 21:29:43,660 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: defer
+2024-03-31 21:29:43,660 INFO    HandlerThread:37515 [handler.py:handle_request_defer():172] handle defer: 7
+2024-03-31 21:29:43,661 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: defer
+2024-03-31 21:29:43,661 INFO    SenderThread:37515 [sender.py:send_request_defer():610] handle sender defer: 7
+2024-03-31 21:29:44,195 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:29:44,656 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: poll_exit
+2024-03-31 21:29:45,661 INFO    SenderThread:37515 [sender.py:transition_state():614] send defer: 8
+2024-03-31 21:29:45,661 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: poll_exit
+2024-03-31 21:29:45,662 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: defer
+2024-03-31 21:29:45,662 INFO    HandlerThread:37515 [handler.py:handle_request_defer():172] handle defer: 8
+2024-03-31 21:29:45,663 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: defer
+2024-03-31 21:29:45,663 INFO    SenderThread:37515 [sender.py:send_request_defer():610] handle sender defer: 8
+2024-03-31 21:29:45,663 INFO    SenderThread:37515 [job_builder.py:build():318] Attempting to build job artifact
+2024-03-31 21:29:45,664 INFO    SenderThread:37515 [job_builder.py:_get_source_type():455] is repo sourced job
+2024-03-31 21:29:45,741 INFO    SenderThread:37515 [job_builder.py:build():431] adding wandb-job metadata file
+2024-03-31 21:29:45,746 INFO    SenderThread:37515 [sender.py:transition_state():614] send defer: 9
+2024-03-31 21:29:45,747 DEBUG   SenderThread:37515 [sender.py:send():379] send: artifact
+2024-03-31 21:29:45,747 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: defer
+2024-03-31 21:29:45,750 INFO    HandlerThread:37515 [handler.py:handle_request_defer():172] handle defer: 9
+2024-03-31 21:29:46,207 INFO    Thread-12 :37515 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:29:46,372 INFO    wandb-upload_1:37515 [upload_job.py:push():86] Skipped uploading /Users/austinstone/Library/Application Support/wandb/artifacts/staging/tmptinu_mme
+2024-03-31 21:29:46,668 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: poll_exit
+2024-03-31 21:29:46,705 INFO    wandb-upload_0:37515 [upload_job.py:push():89] Uploaded file /var/folders/70/w63jf9896tq2j0s093fx1r440000gn/T/tmp0u42ep_g/wandb-job.json
+2024-03-31 21:29:47,613 INFO    SenderThread:37515 [sender.py:send_artifact():1468] sent artifact job-git_github.com_AustinCStone_bittersweet.git_train.py - {'id': 'QXJ0aWZhY3Q6Nzc4NDEwOTU0', 'state': 'PENDING', 'artifactSequence': {'id': 'QXJ0aWZhY3RDb2xsZWN0aW9uOjE1NDY5MzkyMQ==', 'latestArtifact': {'id': 'QXJ0aWZhY3Q6Nzc4NDA2MDUy', 'versionIndex': 0}}}
+2024-03-31 21:29:47,614 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: defer
+2024-03-31 21:29:47,614 INFO    SenderThread:37515 [sender.py:send_request_defer():610] handle sender defer: 9
+2024-03-31 21:29:47,614 INFO    SenderThread:37515 [dir_watcher.py:finish():358] shutting down directory watcher
+2024-03-31 21:29:48,210 INFO    SenderThread:37515 [dir_watcher.py:finish():388] scan: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files
+2024-03-31 21:29:48,211 INFO    SenderThread:37515 [dir_watcher.py:finish():402] scan save: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/requirements.txt requirements.txt
+2024-03-31 21:29:48,211 INFO    SenderThread:37515 [dir_watcher.py:finish():402] scan save: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log output.log
+2024-03-31 21:29:48,214 INFO    SenderThread:37515 [dir_watcher.py:finish():402] scan save: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/config.yaml config.yaml
+2024-03-31 21:29:48,217 INFO    SenderThread:37515 [dir_watcher.py:finish():402] scan save: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json wandb-summary.json
+2024-03-31 21:29:48,219 INFO    SenderThread:37515 [dir_watcher.py:finish():402] scan save: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-metadata.json wandb-metadata.json
+2024-03-31 21:29:48,220 INFO    SenderThread:37515 [sender.py:transition_state():614] send defer: 10
+2024-03-31 21:29:48,226 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: poll_exit
+2024-03-31 21:29:48,226 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: defer
+2024-03-31 21:29:48,228 INFO    HandlerThread:37515 [handler.py:handle_request_defer():172] handle defer: 10
+2024-03-31 21:29:48,229 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: defer
+2024-03-31 21:29:48,229 INFO    SenderThread:37515 [sender.py:send_request_defer():610] handle sender defer: 10
+2024-03-31 21:29:48,230 INFO    SenderThread:37515 [file_pusher.py:finish():172] shutting down file pusher
+2024-03-31 21:29:48,532 INFO    wandb-upload_0:37515 [upload_job.py:push():131] Uploaded file /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/output.log
+2024-03-31 21:29:48,661 INFO    wandb-upload_3:37515 [upload_job.py:push():131] Uploaded file /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/wandb-summary.json
+2024-03-31 21:29:48,662 INFO    wandb-upload_2:37515 [upload_job.py:push():131] Uploaded file /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/config.yaml
+2024-03-31 21:29:48,663 INFO    wandb-upload_1:37515 [upload_job.py:push():131] Uploaded file /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/files/requirements.txt
+2024-03-31 21:29:48,677 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: poll_exit
+2024-03-31 21:29:48,677 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: poll_exit
+2024-03-31 21:29:48,867 INFO    Thread-11 :37515 [sender.py:transition_state():614] send defer: 11
+2024-03-31 21:29:48,868 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: defer
+2024-03-31 21:29:48,868 INFO    HandlerThread:37515 [handler.py:handle_request_defer():172] handle defer: 11
+2024-03-31 21:29:48,869 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: defer
+2024-03-31 21:29:48,869 INFO    SenderThread:37515 [sender.py:send_request_defer():610] handle sender defer: 11
+2024-03-31 21:29:48,869 INFO    SenderThread:37515 [file_pusher.py:join():178] waiting for file pusher
+2024-03-31 21:29:48,871 INFO    SenderThread:37515 [sender.py:transition_state():614] send defer: 12
+2024-03-31 21:29:48,871 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: defer
+2024-03-31 21:29:48,871 INFO    HandlerThread:37515 [handler.py:handle_request_defer():172] handle defer: 12
+2024-03-31 21:29:48,871 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: defer
+2024-03-31 21:29:48,871 INFO    SenderThread:37515 [sender.py:send_request_defer():610] handle sender defer: 12
+2024-03-31 21:29:48,871 INFO    SenderThread:37515 [file_stream.py:finish():614] file stream finish called
+2024-03-31 21:29:49,185 INFO    SenderThread:37515 [file_stream.py:finish():618] file stream finish is done
+2024-03-31 21:29:49,185 INFO    SenderThread:37515 [sender.py:transition_state():614] send defer: 13
+2024-03-31 21:29:49,185 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: defer
+2024-03-31 21:29:49,186 INFO    HandlerThread:37515 [handler.py:handle_request_defer():172] handle defer: 13
+2024-03-31 21:29:49,186 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: defer
+2024-03-31 21:29:49,187 INFO    SenderThread:37515 [sender.py:send_request_defer():610] handle sender defer: 13
+2024-03-31 21:29:49,187 INFO    SenderThread:37515 [sender.py:transition_state():614] send defer: 14
+2024-03-31 21:29:49,188 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: defer
+2024-03-31 21:29:49,188 DEBUG   SenderThread:37515 [sender.py:send():379] send: final
+2024-03-31 21:29:49,188 INFO    HandlerThread:37515 [handler.py:handle_request_defer():172] handle defer: 14
+2024-03-31 21:29:49,188 DEBUG   SenderThread:37515 [sender.py:send():379] send: footer
+2024-03-31 21:29:49,188 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: defer
+2024-03-31 21:29:49,188 INFO    SenderThread:37515 [sender.py:send_request_defer():610] handle sender defer: 14
+2024-03-31 21:29:49,189 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: poll_exit
+2024-03-31 21:29:49,190 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: poll_exit
+2024-03-31 21:29:49,190 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: poll_exit
+2024-03-31 21:29:49,190 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: poll_exit
+2024-03-31 21:29:49,191 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: server_info
+2024-03-31 21:29:49,191 DEBUG   SenderThread:37515 [sender.py:send_request():406] send_request: server_info
+2024-03-31 21:29:49,195 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: get_summary
+2024-03-31 21:29:49,196 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: sampled_history
+2024-03-31 21:29:49,198 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-31 21:29:49,269 INFO    MainThread:37515 [wandb_run.py:_footer_history_summary_info():3920] rendering history
+2024-03-31 21:29:49,270 INFO    MainThread:37515 [wandb_run.py:_footer_history_summary_info():3952] rendering summary
+2024-03-31 21:29:49,270 INFO    MainThread:37515 [wandb_run.py:_footer_sync_info():3879] logging synced files
+2024-03-31 21:29:49,271 DEBUG   HandlerThread:37515 [handler.py:handle_request():146] handle_request: shutdown
+2024-03-31 21:29:49,271 INFO    HandlerThread:37515 [handler.py:finish():866] shutting down handler
+2024-03-31 21:29:49,657 WARNING StreamThr :37515 [internal.py:is_dead():414] Internal process exiting, parent pid 37506 disappeared
+2024-03-31 21:29:49,658 ERROR   StreamThr :37515 [internal.py:wandb_internal():152] Internal process shutdown.
+2024-03-31 21:29:50,193 INFO    WriterThread:37515 [datastore.py:close():296] close: /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/run-cdjenst5.wandb
+2024-03-31 21:29:50,270 INFO    SenderThread:37515 [sender.py:finish():1546] shutting down sender
+2024-03-31 21:29:50,270 INFO    SenderThread:37515 [file_pusher.py:finish():172] shutting down file pusher
+2024-03-31 21:29:50,271 INFO    SenderThread:37515 [file_pusher.py:join():178] waiting for file pusher

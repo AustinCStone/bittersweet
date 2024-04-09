@@ -1,0 +1,27 @@
+2024-03-31 21:22:26,895 INFO    MainThread:37506 [wandb_setup.py:_flush():76] Current SDK version is 0.16.5
+2024-03-31 21:22:26,896 INFO    MainThread:37506 [wandb_setup.py:_flush():76] Configure stats pid to 37506
+2024-03-31 21:22:26,896 INFO    MainThread:37506 [wandb_setup.py:_flush():76] Loading settings from /Users/austinstone/.config/wandb/settings
+2024-03-31 21:22:26,896 INFO    MainThread:37506 [wandb_setup.py:_flush():76] Loading settings from /Users/austinstone/bittersweet/wandb/settings
+2024-03-31 21:22:26,896 INFO    MainThread:37506 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2024-03-31 21:22:26,897 INFO    MainThread:37506 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2024-03-31 21:22:26,897 INFO    MainThread:37506 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'train.py', 'program_abspath': '/Users/austinstone/bittersweet/train.py', 'program': '/Users/austinstone/bittersweet/train.py'}
+2024-03-31 21:22:26,897 INFO    MainThread:37506 [wandb_setup.py:_flush():76] Applying login settings: {}
+2024-03-31 21:22:26,897 INFO    MainThread:37506 [wandb_init.py:_log_setup():527] Logging user logs to /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/logs/debug.log
+2024-03-31 21:22:26,897 INFO    MainThread:37506 [wandb_init.py:_log_setup():528] Logging internal logs to /Users/austinstone/bittersweet/wandb/run-20240331_212226-cdjenst5/logs/debug-internal.log
+2024-03-31 21:22:26,897 INFO    MainThread:37506 [wandb_init.py:init():567] calling init triggers
+2024-03-31 21:22:26,897 INFO    MainThread:37506 [wandb_init.py:init():574] wandb.init called with sweep_config: {}
+config: {'chunk_size': 8, 'split_percentage': 0.8, 'batch_size': 512, 'lr': 0.0001, 'ntokens': 256, 'd_model': 256, 'd_hid': 512, 'nlayers': 8, 'nhead': 2, 'dropout': 0.2, 'num_latent_vectors': 24000, 'use_bits': False}
+2024-03-31 21:22:26,897 INFO    MainThread:37506 [wandb_init.py:init():617] starting backend
+2024-03-31 21:22:26,897 INFO    MainThread:37506 [wandb_init.py:init():621] setting up manager
+2024-03-31 21:22:26,900 INFO    MainThread:37506 [backend.py:_multiprocessing_setup():105] multiprocessing start_methods=spawn,fork,forkserver, using: spawn
+2024-03-31 21:22:26,902 INFO    MainThread:37506 [wandb_init.py:init():629] backend started and connected
+2024-03-31 21:22:26,915 INFO    MainThread:37506 [wandb_init.py:init():721] updated telemetry
+2024-03-31 21:22:26,944 INFO    MainThread:37506 [wandb_init.py:init():754] communicating run to backend with 90.0 second timeout
+2024-03-31 21:22:27,261 INFO    MainThread:37506 [wandb_run.py:_on_init():2344] communicating current version
+2024-03-31 21:22:27,379 INFO    MainThread:37506 [wandb_run.py:_on_init():2353] got version response 
+2024-03-31 21:22:27,379 INFO    MainThread:37506 [wandb_init.py:init():805] starting run threads in backend
+2024-03-31 21:22:27,492 INFO    MainThread:37506 [wandb_run.py:_console_start():2323] atexit reg
+2024-03-31 21:22:27,492 INFO    MainThread:37506 [wandb_run.py:_redirect():2178] redirect: wrap_raw
+2024-03-31 21:22:27,492 INFO    MainThread:37506 [wandb_run.py:_redirect():2243] Wrapping output streams.
+2024-03-31 21:22:27,492 INFO    MainThread:37506 [wandb_run.py:_redirect():2268] Redirects installed.
+2024-03-31 21:22:27,493 INFO    MainThread:37506 [wandb_init.py:init():848] run started, returning control to user process

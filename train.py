@@ -1,10 +1,13 @@
-# pip install torch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 xformers==0.0.23post1
+# pip install torch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 xformers==0.0.23post1 mwparserfromhell datasets
 # wandb key: 4d89c43f67fc55f37cc6e65e9304ef29b1a454f3
 import torch
 import numpy as np
+import time
 import data
 import torch.nn.functional as F
 import modeling
+import tqdm
+from sklearn.cluster import MiniBatchKMeans
 # from torchviz import make_dot
 import wandb
 
@@ -14,6 +17,30 @@ USE_WANDB=False
 
 import torch
 import torch.nn.functional as F
+
+
+def kmeans_features(encoder_model, train_data, vocab_size, max_steps):
+    encoder_model.eval()  # turn on train mode
+    pred_vectors = []
+    for batch_idx, batch in tqdm.tqdm(enumerate(train_data)):
+        if batch_idx > max_steps:
+            break
+        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        batch = batch.to(device)
+        soft_preds = encoder_model(batch) 
+        soft_preds = soft_preds.view(-1, soft_preds.shape[-1])
+        soft_preds = soft_preds.detach().cpu().numpy()
+        pred_vectors.extend(soft_preds)
+    # Specify the number of clusters
+    print(f"Running mini batch kmeans on {len(pred_vectors)} vectors with {vocab_size} centroids...")
+    n_clusters = vocab_size
+    # Initialize MiniBatchKMeans
+    start = time.time()
+    kmeans = MiniBatchKMeans(n_clusters=n_clusters, batch_size=10_000, random_state=42)
+    kmeans.fit(pred_vectors)
+    end = time.time()
+    print(f"KMeans took {end - start} seconds.")
+    return kmeans.cluster_centers_
 
 
 def diversity_loss(vectors, subsample_size=1000):
@@ -55,7 +82,8 @@ def diversity_loss(vectors, subsample_size=1000):
 
 
 def evaluate(encoder_model, decoder_model, eval_data, criterion,
-             num_evals=1, print_predictions=True, samples_to_print=1):
+             num_evals=1, print_predictions=True, samples_to_print=1,
+             use_vq: bool = False):
     encoder_model.eval()  # Turn on evaluation mode
     decoder_model.eval()  # Turn on evaluation mode
 
@@ -70,16 +98,13 @@ def evaluate(encoder_model, decoder_model, eval_data, criterion,
             device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
             batch = batch.to(device)
             T = batch.shape[1]  # Assuming T is the sequence length from inputs
+            if use_vq:
+                hard_preds_st, _, _, _ = encoder_model(batch) 
+                reconstructed = decoder_model(hard_preds_st)
+            else:
+                soft_preds = encoder_model(batch) 
+                reconstructed = decoder_model(soft_preds)
 
-            hard_preds_st, _, _, _, _ = encoder_model(batch) 
-            # latent = preds[:, -1, :]
-            # Tile the mean prediction.
-            # tiled_latent = latent 
-            # tiled_latent = torch.mean(preds, dim=1, keepdims=True)
-            # tiled_latent = latent.unsqueeze(1)  
-
-            # tiled_latent = tiled_latent.expand(-1, T, -1)
-            reconstructed = decoder_model(hard_preds_st)
             num_classes = reconstructed.shape[-1]
             reconstructed_flat = reconstructed.view(-1, num_classes)
             targets_flat = batch.view(-1).long()
@@ -87,7 +112,6 @@ def evaluate(encoder_model, decoder_model, eval_data, criterion,
             loss = criterion(reconstructed_flat, targets_flat)
             total_loss += loss.item()
             _, predicted_labels = torch.max(reconstructed_flat, 1)
-            soft_prediction = torch.nn.Softmax(dim=-1)(reconstructed)
             correct_predictions += (predicted_labels == targets_flat).sum().item()
             total_predictions += targets_flat.size(0)
 
@@ -108,13 +132,11 @@ def evaluate(encoder_model, decoder_model, eval_data, criterion,
 
     return avg_loss, accuracy
 
-# When calling evaluate from main, you can now specify to print predictions:
-# evaluate(encoder_model, decoder_model, eval_data, criterion, print_predictions=True, samples_to_print=5)
-
 
 def train(encoder_model, decoder_model, train_data, criterion,
           optimizer, log_interval=1, max_steps=100, start_step=0,
-          diversity_weight=1.0):
+          diversity_weight=1.0,
+          use_vq: bool = False):
     encoder_model.train()  # turn on train mode
     decoder_model.train()  # turn on train mode
     criterion = torch.nn.CrossEntropyLoss()
@@ -134,30 +156,23 @@ def train(encoder_model, decoder_model, train_data, criterion,
         # Input from batch is 0s and 1s of shape [batch_size, T]
         # Output shape should be [batch_size, T, d_model]
         optimizer.zero_grad()
-        hard_preds_st, hard_preds, soft_preds, tokens, soft_preds_expanded = encoder_model(batch) 
-        # Take the last prediction as the latent vector.
-        # It should have shape [batch_size, d_model]
-        #latent = tiled_latent = preds
-        # latent = hard_preds[:, -1, :]
-        # 0/0
-        # Tile the latent in order to get the desired output
-        # size. The output should have shape [batch_size, T, d_model]
-        # T = hard_preds.shape[1]  # Assuming T is the sequence length from preds
-        # Tile the mean prediction.
-        # tiled_latent = latent.unsqueeze(1)  
-        #tiled_latent = torch.mean(preds, dim=1, keepdims=True)
-        # print("Tiled latent size", tiled_latent.shape)
-        # print("Tiled latent", tiled_latent)
-        # tiled_latent = tiled_latent.expand(-1, T, -1)
-        # print("Tiled latent 2", tiled_latent)
-        reconstructed = decoder_model(hard_preds_st)
-        # yhat = reconstructed
-        #make_dot(yhat, params=dict(list(encoder_model.named_parameters()) + list(decoder_model.named_parameters()))).render("rnn_torchviz", format="png")
+
+        if use_vq:
+            hard_preds_st, hard_preds, soft_preds, tokens = encoder_model(batch) 
+            reconstructed = decoder_model(hard_preds_st)
+            loss_div = diversity_loss(soft_preds) * diversity_weight
+            loss_vq = F.mse_loss(hard_preds, soft_preds.detach())
+            loss_commit = F.mse_loss(soft_preds, hard_preds.detach())
+        else:
+            soft_preds = encoder_model(batch) 
+            reconstructed = decoder_model(soft_preds)
+            loss_div = torch.zeros(1)
+            loss_vq = torch.zeros(1)
+            loss_commit = torch.zeros(1)
+            tokens = '-1'
+
         num_classes = reconstructed.shape[-1]
         loss_recon = criterion(reconstructed.view(-1, num_classes), batch.view(-1).long())
-        loss_div = diversity_loss(soft_preds) * diversity_weight
-        loss_vq = F.mse_loss(hard_preds, soft_preds_expanded.detach())
-        loss_commit = F.mse_loss(soft_preds_expanded, hard_preds.detach())
         # TODO add loss weights
         loss = loss_recon + loss_vq + loss_commit + loss_div
         loss.backward()
@@ -189,21 +204,24 @@ def main():
     if DEBUG:
         config = {
             # Load data
-            'chunk_size':8, # Encode 8 bytes sequence length.
+            'chunk_size':60, # Encode 8 bytes sequence length.
             'split_percentage':0.8, # Use 80% of data for training.
-            'batch_size':8,
+            'batch_size':32,
             # model hypers
-            'lr':1e-4,
+            'lr':1e-3,
             'diversity_weight': 50.0,
             'ntokens':256,  # All bytes.
-            'd_model':256,
+            'd_model': 300,
             'd_hid':512,  # dimension of the feedforward network model in ``nn.TransformerEncoder``
-            'nlayers':8,  # number of ``nn.TransformerEncoderLayer`` in ``nn.TransformerEncoder``
-            'nhead': 2,  # number of heads in ``nn.MultiheadAttention``
+            'nlayers':4,  # number of ``nn.TransformerEncoderLayer`` in ``nn.TransformerEncoder``
+            'nhead': 4,  # number of heads in ``nn.MultiheadAttention``
             'dropout': 0.2,  # dropout probability
-            'num_latent_vectors': 24_000,
+            'num_latent_vectors': 20_000,
             'use_bits': False,
-            'compression_factor': 2,
+            'compression_factor': 6,
+            'use_vq': False,
+            'steps_before_vq': 1,
+            'kmeans_gather_steps': 1000,
         }
     else:
         config = {
@@ -222,7 +240,9 @@ def main():
             'dropout': 0.2,  # dropout probability
             'num_latent_vectors': 124_000,
             'use_bits': False,
-            'compression_factor': 2,
+            'compression_factor': 6,
+            'steps_before_vq': 2000,
+            'kmeans_gather_steps': 10_000,
         }
     # start a new wandb run to track this script
     if USE_WANDB:
@@ -239,43 +259,67 @@ def main():
         batch_size=config['batch_size'],
         use_bits=config['use_bits'])
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    encoder_model = modeling.TransformerModel(
+    assert config['nlayers'] % 2 == 0
+    encoder_model = modeling.PoolExpandTransformerModel(
         ntoken=config['ntokens'],
         d_model=config['d_model'],
         nhead=config['nhead'],
         d_hid=config['d_hid'],
-        nlayers=config['nlayers'],
+        nlayers_pre=config['nlayers'] // 2,
+        nlayers_post=config['nlayers'] // 2,
         dropout=config['dropout'],
         include_linear=False,
-        use_vq=True,
+        use_vq=False,
         num_latent_vectors=config['num_latent_vectors'],
         max_len=config['chunk_size'],
         compression_factor=config['compression_factor']).to(device)
     assert config['d_model'] % config['compression_factor'] == 0
-    decoder_model = modeling.TransformerModel(
+    decoder_model = modeling.PoolExpandTransformerModel(
         ntoken=config['ntokens'],
-        d_model=config['d_model'] // config['compression_factor'],
+        d_model=config['d_model'],
         d_hid=config['d_hid'],
-        nlayers=config['nlayers'],
+        nlayers_pre=config['nlayers'] // 2,
+        nlayers_post=config['nlayers'] // 2,
         nhead=config['nhead'],
         dropout=config['dropout'],
         include_linear=True,
         vector_input=True,
         use_vq=False,
-        max_len=config['chunk_size']).to(device)
+        max_len=config['chunk_size'],
+        compression_factor=1./config["compression_factor"]).to(device)
     # Penalize the model for reconstructing the binary input.
     criterion = torch.nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(list(encoder_model.parameters()) + list(decoder_model.parameters()),
                                  lr=config['lr'])
+    train_losses = train(
+        encoder_model=encoder_model,
+        decoder_model=decoder_model,
+        train_data=train_data,
+        criterion=criterion, optimizer=optimizer,
+        start_step=0, max_steps=config['steps_before_vq'],
+        diversity_weight=config['diversity_weight'],
+        use_vq=False)
+
+    _, _ = evaluate(encoder_model, decoder_model, eval_data,
+                    criterion=criterion, use_vq=False)
+    init_codebook = kmeans_features(encoder_model=encoder_model,
+                                    train_data=train_data,
+                                    vocab_size=config['num_latent_vectors'],
+                                    max_steps=config['kmeans_gather_steps'])
+    encoder_model.use_vq = True
+    import ipdb; ipdb.set_trace()
+
     steps = 0
-    for _ in range(1000):
+    for _ in range(2): # Pretrain continuous
         train_losses = train(encoder_model, decoder_model, train_data,
                              criterion=criterion, optimizer=optimizer,
                              start_step=steps, max_steps=1000,
-                             diversity_weight=config['diversity_weight'])
+                             diversity_weight=config['diversity_weight'],
+                             use_vq=True)
         steps += 1000
         avg_loss, accuracy = evaluate(encoder_model, decoder_model, eval_data,
-                                      criterion=criterion)
+                                      criterion=criterion,
+                                      use_vq=True)
     wandb.finish()
 if __name__ == "__main__":
     main()  # Call the main function

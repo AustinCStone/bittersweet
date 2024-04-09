@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/Users/austinstone/bittersweet/train.py", line 205, in <module>
+    main()  # Call the main function
+  File "/Users/austinstone/bittersweet/train.py", line 194, in main
+    lr=lr)
+NameError: name 'lr' is not defined

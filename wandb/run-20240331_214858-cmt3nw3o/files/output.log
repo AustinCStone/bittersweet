@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/Users/austinstone/bittersweet/train.py", line 215, in <module>
+    main()  # Call the main function
+  File "/Users/austinstone/bittersweet/train.py", line 177, in main
+    encoder_model = modeling.TransformerModel(
+  File "/Users/austinstone/bittersweet/modeling.py", line 73, in __init__
+    encoder_layers = TransformerEncoderLayer(d_model, nhead, d_hid, dropout, batch_first=True)
+  File "/Users/austinstone/Library/Python/3.9/lib/python/site-packages/torch/nn/modules/transformer.py", line 560, in __init__
+    self.self_attn = MultiheadAttention(d_model, nhead, dropout=dropout,
+  File "/Users/austinstone/Library/Python/3.9/lib/python/site-packages/torch/nn/modules/activation.py", line 991, in __init__
+    assert self.head_dim * num_heads == self.embed_dim, "embed_dim must be divisible by num_heads"
+AssertionError: embed_dim must be divisible by num_heads

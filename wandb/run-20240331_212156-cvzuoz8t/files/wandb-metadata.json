@@ -1,0 +1,49 @@
+{
+    "os": "macOS-14.2.1-arm64-arm-64bit",
+    "python": "3.9.6",
+    "heartbeatAt": "2024-04-01T04:21:57.154890",
+    "startedAt": "2024-04-01T04:21:56.490101",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "/Users/austinstone/bittersweet/train.py",
+    "codePathLocal": "train.py",
+    "codePath": "train.py",
+    "git": {
+        "remote": "git@github.com:AustinCStone/bittersweet.git",
+        "commit": "fa9047663a1c1cd6e84fc8f7c9a7cecdbc6be1c6"
+    },
+    "email": "austinstone@utexas.edu",
+    "root": "/Users/austinstone/bittersweet",
+    "host": "Austins-MacBook-Air.local",
+    "username": "austinstone",
+    "executable": "/Library/Developer/CommandLineTools/usr/bin/python3",
+    "cpu_count": 8,
+    "cpu_count_logical": 8,
+    "cpu_freq": {
+        "current": 3204,
+        "min": 600,
+        "max": 3204
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 3204,
+            "min": 600,
+            "max": 3204
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 460.4317207336426,
+            "used": 9.42599868774414
+        }
+    },
+    "gpuapple": {
+        "type": "arm",
+        "vendor": "Apple"
+    },
+    "memory": {
+        "total": 16.0
+    }
+}
