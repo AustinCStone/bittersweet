@@ -78,7 +78,7 @@ def kmeans_features(encoder_model, train_data, vocab_size, max_gather_steps,
     if not torch_kmeans:
         print(f"Running mini batch kmeans on {len(pred_vectors)} vectors with {vocab_size} centroids...")
         kmeans = MiniBatchKMeans(n_clusters=n_clusters, batch_size=10_000, random_state=42,
-                                max_iter=max_kmeans_steps)
+                                 max_iter=max_kmeans_steps, verbose=10**10)
         kmeans.fit(pred_vectors)
         centroids = kmeans.cluster_centers_
         centroids = torch.from_numpy(centroids).float().to(device)
@@ -197,7 +197,7 @@ def train(encoder_model, decoder_model, train_data, criterion,
         'diversity_loss': [],
     }
     for batch_idx, batch in enumerate(train_data):
-        if batch_idx > max_steps:
+        if batch_idx + start_step > max_steps:
             break
 
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -254,9 +254,9 @@ def main():
     if DEBUG:
         config = {
             # Load data
-            'chunk_size': 60, # Encode 8 bytes sequence length.
+            'chunk_size': 120, # Encode 8 bytes sequence length.
             'split_percentage':0.8, # Use 80% of data for training.
-            'batch_size':32,
+            'batch_size': 32,
             # model hypers
             'lr':1e-3,
             'diversity_weight': 1.0,
@@ -266,17 +266,17 @@ def main():
             'nlayers':4,  # number of ``nn.TransformerEncoderLayer`` in ``nn.TransformerEncoder``
             'nhead': 4,  # number of heads in ``nn.MultiheadAttention``
             'dropout': 0.2,  # dropout probability
-            'num_latent_vectors': 1000,
+            'num_latent_vectors': 8000,
             'use_bits': False,
-            'compression_factor': 2,
+            'compression_factor': 4,
             'use_vq': False,
-            'steps_before_vq': 150,
-            'kmeans_gather_steps': 500,
+            'steps_before_vq': 500,
+            'kmeans_gather_steps': 25,
             'kmeans_steps': 25,
             'eval_every': 100,
-            'version': 'shakespeare',
+            'version': 'wiki',
             'kmeans_algo': 'sklearn',
-            'restore_dir': '/tmp/local_run_discrete_checkpoints',
+            'restore_dir': '/tmp/local_run_continuous_checkpoints',
         }
     else:
         config = {
@@ -297,7 +297,7 @@ def main():
             'use_bits': False,
             'compression_factor': 8,
             'steps_before_vq': 2000,
-            'kmeans_gather_steps': 50,
+            'kmeans_gather_steps': 500,
             'kmeans_steps': 20,
             'eval_every': 1000,
             'version': 'wiki',
@@ -354,21 +354,31 @@ def main():
 
     # Penalize the model for reconstructing the binary input.
     criterion = torch.nn.CrossEntropyLoss()
+    # TODO: Optimizer params not persisted or restored. This causes loss
+    # spikes on restoration.
     optimizer = torch.optim.Adam(list(encoder_model.parameters()) + list(decoder_model.parameters()), lr=config['lr'])
 
     discrete_checkpoint_dir = f'/tmp/{run_id}_discrete_checkpoints'
     continuous_checkpoint_dir = f'/tmp/{run_id}_continuous_checkpoints'
     os.makedirs(continuous_checkpoint_dir, exist_ok=True)
     os.makedirs(discrete_checkpoint_dir, exist_ok=True)
+
     steps = 0
-    if config['restore_dir'] is None: # Train from scratch.
-        print("Training continuous model from scratch...")
+
+    if config['restore_dir'] is not None and 'continuous' in config['restore_dir']:
+        encoder_model, steps = load_model(config['restore_dir'], encoder_model, model_name="encoder")
+        decoder_model, dec_steps = load_model(config['restore_dir'], decoder_model, model_name="decoder")
+        assert steps == dec_steps
+        print(f"Restored continuous model from {config['restore_dir']} at step {steps}")
+
+    if config['restore_dir'] is None or steps < config['steps_before_vq']: 
+        print("Training continuous model...")
         continuous_losses = train(
             encoder_model=encoder_model,
             decoder_model=decoder_model,
             train_data=train_data,
             criterion=criterion, optimizer=optimizer,
-            start_step=0, max_steps=config['steps_before_vq'],
+            start_step=steps, max_steps=config['steps_before_vq'],
             diversity_weight=config['diversity_weight'],
             use_vq=False)
         steps = config['steps_before_vq']
@@ -376,11 +386,6 @@ def main():
         save_model(encoder_model, decoder_model, continuous_checkpoint_dir, steps)
         cont_avg_loss, cont_accuracy = evaluate(encoder_model, decoder_model, eval_data,
                                                 criterion=criterion, use_vq=False)
-    elif 'continuous' in config['restore_dir']:
-        encoder_model, steps = load_model(config['restore_dir'], encoder_model, model_name="encoder")
-        decoder_model, dec_steps = load_model(config['restore_dir'], decoder_model, model_name="decoder")
-        assert steps == dec_steps
-        print(f"Restored continuous model from {config['restore_dir']} at step {steps}")
 
     if config['restore_dir'] is not None and 'discrete' in config['restore_dir']:
         encoder_model, steps = load_model(config['restore_dir'], encoder_model, model_name="encoder")
@@ -401,14 +406,14 @@ def main():
     for _ in range(100): # Pretrain continuous
         train_losses = train(encoder_model, decoder_model, train_data,
                              criterion=criterion, optimizer=optimizer,
-                             start_step=steps, max_steps=config['eval_every'],
+                             start_step=steps, max_steps=steps + config['eval_every'],
                              diversity_weight=config['diversity_weight'],
                              use_vq=True)
         steps += config['eval_every']
         avg_loss, accuracy = evaluate(encoder_model, decoder_model, eval_data, criterion=criterion, use_vq=True)
         print("Saving model....")
         save_model(encoder_model, decoder_model, discrete_checkpoint_dir, steps)
-        manage_checkpoints(discrete_checkpoint_dir)  
+        # manage_checkpoints(discrete_checkpoint_dir)  
     wandb.finish()
 if __name__ == "__main__":
     main()  # Call the main function
