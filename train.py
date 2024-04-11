@@ -276,7 +276,7 @@ def main():
             'eval_every': 100,
             'version': 'shakespeare',
             'kmeans_algo': 'sklearn',
-            'restore_dir': None,
+            'restore_dir': '/tmp/local_run_discrete_checkpoints',
         }
     else:
         config = {
@@ -385,6 +385,7 @@ def main():
         encoder_model, steps = load_model(config['restore_dir'], encoder_model, model_name="encoder")
         decoder_model, dec_steps = load_model(config['restore_dir'], decoder_model, model_name="decoder")
         assert steps == dec_steps
+        encoder_model.use_vq = True
         print(f"Restored discrete model from {config['restore_dir']} at step {steps}")
     else:
         assert config['kmeans_algo'] in ['torch', 'sklearn']
@@ -396,8 +397,6 @@ def main():
                                         torch_kmeans=config['kmeans_algo'] == 'torch')
         encoder_model.use_vq = True
         encoder_model.set_codebook(init_codebook)
-
-    checkpoint_dir = '/tmp/discrete_checkpoints'
     for _ in range(2): # Pretrain continuous
         train_losses = train(encoder_model, decoder_model, train_data,
                              criterion=criterion, optimizer=optimizer,
@@ -407,8 +406,8 @@ def main():
         steps += config['eval_every']
         avg_loss, accuracy = evaluate(encoder_model, decoder_model, eval_data, criterion=criterion, use_vq=True)
         print("Saving model....")
-        save_model(encoder_model, decoder_model, checkpoint_dir, steps)
-        manage_checkpoints(checkpoint_dir)  
+        save_model(encoder_model, decoder_model, discrete_checkpoint_dir, steps)
+        manage_checkpoints(discrete_checkpoint_dir)  
     wandb.finish()
 if __name__ == "__main__":
     main()  # Call the main function
