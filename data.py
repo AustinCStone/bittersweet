@@ -10,8 +10,9 @@ def bytes_to_int_chunks(bytestring, chunk_size=128):
         yield torch.tensor([byte for byte in chunk], dtype=torch.uint8)
 
 
-class ShakespeareDataset(Dataset):
-    def __init__(self, text_path, chunk_size=128, train=True, split_percentage=0.8, use_bits=True):
+class BytesDataset(Dataset):
+    def __init__(self, text_path, chunk_size=128, train=True, split_percentage=0.8, use_bits=False):
+        print("Loading data...")
         self.chunk_size = chunk_size
         self.train = train
         self.use_bits = use_bits
@@ -38,6 +39,7 @@ class ShakespeareDataset(Dataset):
             self.indices = self.indices[:split_index]
         else:
             self.indices = self.indices[split_index:]
+        print("Done loading data...")
 
     def __len__(self):
         return len(self.indices)
@@ -72,10 +74,15 @@ class ShakespeareDataset(Dataset):
 
         return tensor
 
-def create_data_loaders(text_path, chunk_size=128, split_percentage=0.8, batch_size=10, use_bits=True):
-    train_dataset = ShakespeareDataset(text_path, chunk_size=chunk_size, train=True, split_percentage=split_percentage, use_bits=use_bits)
-    test_dataset = ShakespeareDataset(text_path, chunk_size=chunk_size, train=False, split_percentage=split_percentage, use_bits=use_bits)
-
+def create_data_loaders(version, chunk_size=128, split_percentage=0.8, batch_size=10, use_bits=True):
+    if version == 'shakespeare':
+        text_path = 'input.txt'
+    elif version == 'wiki':
+        text_path = 'simple_wiki.txt'
+    else:
+        raise NotImplementedError(f'Version {version} not implemented.')
+    train_dataset = BytesDataset(text_path, chunk_size=chunk_size, train=True, split_percentage=split_percentage, use_bits=use_bits)
+    test_dataset = BytesDataset(text_path, chunk_size=chunk_size, train=False, split_percentage=split_percentage, use_bits=use_bits)
     train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=0)
     test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=True, num_workers=0)
 

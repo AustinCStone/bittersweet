@@ -1,4 +1,5 @@
 *.pyc
+simple_wiki.txt
 wandb/*
 venv/
 bin/

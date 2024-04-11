@@ -11,13 +11,35 @@ from sklearn.cluster import MiniBatchKMeans
 from fast_pytorch_kmeans import KMeans
 # from torchviz import make_dot
 import wandb
+import os
+
 
 DEBUG=True
 USE_WANDB=False
 
 
-import torch
-import torch.nn.functional as F
+
+def manage_checkpoints(checkpoint_dir, max_checkpoints=5):
+    # Get all checkpoint files
+    checkpoints = [f for f in os.listdir(checkpoint_dir) if f.endswith(".pt")]
+    
+    # If there are more than `max_checkpoints` files, remove the oldest
+    if len(checkpoints) > max_checkpoints:
+        # Sort files by their creation time
+        checkpoints.sort(key=lambda f: os.path.getctime(os.path.join(checkpoint_dir, f)))
+        # Remove the oldest
+        for f in checkpoints[:-max_checkpoints]:
+            os.remove(os.path.join(checkpoint_dir, f))
+            print(f"Removed old checkpoint: {f}")
+
+
+def save_model(encoder_model, decoder_model, checkpoint_dir, step_number):
+    encoder_path = os.path.join(checkpoint_dir, f"encoder_model_step_{step_number}.pt")
+    decoder_path = os.path.join(checkpoint_dir, f"decoder_model_step_{step_number}.pt")
+
+    torch.save(encoder_model.state_dict(), encoder_path)
+    torch.save(decoder_model.state_dict(), decoder_path)
+    print(f"Saved models at step {step_number} to {checkpoint_dir}")
 
 
 def kmeans_features(encoder_model, train_data, vocab_size, max_gather_steps,
@@ -232,11 +254,12 @@ def main():
             'kmeans_gather_steps': 500,
             'kmeans_steps': 25,
             'eval_every': 100,
+            'version': 'shakespeare',
         }
     else:
         config = {
             # Load data
-            'chunk_size': 128, # Encode 8 bytes sequence length.
+            'chunk_size': 1024, # Encode 8 bytes sequence length.
             'split_percentage': 0.8, # Use 80% of data for training.
             'batch_size': 128,
             'lr': 1e-4,
@@ -250,11 +273,12 @@ def main():
             'dropout': 0.2,  # dropout probability
             'num_latent_vectors': 24_000,
             'use_bits': False,
-            'compression_factor': 6,
+            'compression_factor': 8,
             'steps_before_vq': 2000,
-            'kmeans_gather_steps': 500,
+            'kmeans_gather_steps': 50,
             'kmeans_steps': 20,
             'eval_every': 1000,
+            'version': 'wiki',
         }
     # start a new wandb run to track this script
     if USE_WANDB:
@@ -265,11 +289,11 @@ def main():
             config=config
         )
     train_data, eval_data = data.create_data_loaders(
-        'input.txt',
         chunk_size=config['chunk_size'],
         split_percentage=config['split_percentage'],
         batch_size=config['batch_size'],
-        use_bits=config['use_bits'])
+        use_bits=config['use_bits'],
+        version=config['version'])
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     assert config['nlayers'] % 2 == 0
     encoder_model = modeling.PoolExpandTransformerModel(
@@ -301,9 +325,11 @@ def main():
         compression_factor=1./config["compression_factor"]).to(device)
     # Penalize the model for reconstructing the binary input.
     criterion = torch.nn.CrossEntropyLoss()
-    optimizer = torch.optim.Adam(list(encoder_model.parameters()) + list(decoder_model.parameters()),
-                                 lr=config['lr'])
-    train_losses = train(
+    optimizer = torch.optim.Adam(list(encoder_model.parameters()) + list(decoder_model.parameters()), lr=config['lr'])
+
+    os.makedirs('/tmp/continuous_checkpoints', exist_ok=True)
+    os.makedirs('/tmp/discrete_checkpoints', exist_ok=True)
+    continuous_losses = train(
         encoder_model=encoder_model,
         decoder_model=decoder_model,
         train_data=train_data,
@@ -311,7 +337,8 @@ def main():
         start_step=0, max_steps=config['steps_before_vq'],
         diversity_weight=config['diversity_weight'],
         use_vq=False)
-
+    print("Saving continuous model...")
+    save_model(encoder_model, decoder_model, '/tmp/continuous_checkpoints', config['steps_before_vq'])
     _, _ = evaluate(encoder_model, decoder_model, eval_data,
                     criterion=criterion, use_vq=False)
     init_codebook = kmeans_features(encoder_model=encoder_model,
@@ -323,6 +350,7 @@ def main():
     encoder_model.set_codebook(init_codebook)
 
     steps = 0
+    checkpoint_dir = '/tmp/discrete_checkpoints'
     for _ in range(2): # Pretrain continuous
         train_losses = train(encoder_model, decoder_model, train_data,
                              criterion=criterion, optimizer=optimizer,
@@ -330,9 +358,10 @@ def main():
                              diversity_weight=config['diversity_weight'],
                              use_vq=True)
         steps += config['eval_every']
-        avg_loss, accuracy = evaluate(encoder_model, decoder_model, eval_data,
-                                      criterion=criterion,
-                                      use_vq=True)
+        avg_loss, accuracy = evaluate(encoder_model, decoder_model, eval_data, criterion=criterion, use_vq=True)
+        print("Saving model....")
+        save_model(encoder_model, decoder_model, checkpoint_dir, steps)
+        manage_checkpoints(checkpoint_dir)  
     wandb.finish()
 if __name__ == "__main__":
     main()  # Call the main function
