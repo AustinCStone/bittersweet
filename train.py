@@ -371,10 +371,11 @@ def main():
             start_step=0, max_steps=config['steps_before_vq'],
             diversity_weight=config['diversity_weight'],
             use_vq=False)
+        steps = config['steps_before_vq']
         print("Saving continuous model...")
-        save_model(encoder_model, decoder_model, continuous_checkpoint_dir, config['steps_before_vq'])
-        _, _ = evaluate(encoder_model, decoder_model, eval_data,
-                        criterion=criterion, use_vq=False)
+        save_model(encoder_model, decoder_model, continuous_checkpoint_dir, steps)
+        cont_avg_loss, cont_accuracy = evaluate(encoder_model, decoder_model, eval_data,
+                                                criterion=criterion, use_vq=False)
     elif 'continuous' in config['restore_dir']:
         encoder_model, steps = load_model(config['restore_dir'], encoder_model, model_name="encoder")
         decoder_model, dec_steps = load_model(config['restore_dir'], decoder_model, model_name="decoder")
@@ -397,7 +398,7 @@ def main():
                                         torch_kmeans=config['kmeans_algo'] == 'torch')
         encoder_model.use_vq = True
         encoder_model.set_codebook(init_codebook)
-    for _ in range(2): # Pretrain continuous
+    for _ in range(100): # Pretrain continuous
         train_losses = train(encoder_model, decoder_model, train_data,
                              criterion=criterion, optimizer=optimizer,
                              start_step=steps, max_steps=config['eval_every'],
