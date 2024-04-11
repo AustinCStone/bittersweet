@@ -1,5 +1,3 @@
-torch
-datasets
 apache_beam
 ipdb
 torch==2.1.2
