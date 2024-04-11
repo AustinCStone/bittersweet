@@ -1,2 +1,11 @@
 torch
+datasets
+apache_beam
 ipdb
+torch==2.1.2
+torchvision==0.16.2
+torchaudio==2.1.2
+xformers==0.0.23post1
+mwparserfromhell
+datasets==2.18.0
+fast-pytorch-kmeans

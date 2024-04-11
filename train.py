@@ -18,6 +18,23 @@ DEBUG=True
 USE_WANDB=False
 
 
+def load_model(checkpoint_dir, model, model_name="encoder"):
+    """
+    Load the model from the latest checkpoint.
+    """
+    checkpoints = [f for f in os.listdir(checkpoint_dir) if f.startswith(model_name) and f.endswith(".pt")]
+    if checkpoints:
+        # Sort files by their step number
+        checkpoints.sort(key=lambda f: int(f.split('_')[-1].split('.')[0]))
+        latest_checkpoint = os.path.join(checkpoint_dir, checkpoints[-1])
+        model.load_state_dict(torch.load(latest_checkpoint))
+        step_number = int(checkpoints[-1].split('_')[-1].split('.')[0])
+        print(f"Restored {model_name} from {latest_checkpoint}")
+        return model, step_number
+    else:
+        print(f"No checkpoints found for {model_name} in {checkpoint_dir}. Starting from scratch.")
+        return model, 0
+
 
 def manage_checkpoints(checkpoint_dir, max_checkpoints=5):
     # Get all checkpoint files
@@ -43,7 +60,7 @@ def save_model(encoder_model, decoder_model, checkpoint_dir, step_number):
 
 
 def kmeans_features(encoder_model, train_data, vocab_size, max_gather_steps,
-                    max_kmeans_steps, torch_kmeans=False):
+                    max_kmeans_steps, torch_kmeans=True):
     encoder_model.eval()  # turn on train mode
     pred_vectors = []
     for batch_idx, batch in tqdm.tqdm(enumerate(train_data)):
@@ -64,13 +81,16 @@ def kmeans_features(encoder_model, train_data, vocab_size, max_gather_steps,
                                 max_iter=max_kmeans_steps)
         kmeans.fit(pred_vectors)
         centroids = kmeans.cluster_centers_
+        centroids = torch.from_numpy(centroids).float().to(device)
     else:
         print(f"Running torch kmeans on {len(pred_vectors)} vectors with {vocab_size} centroids...")
-        kmeans = KMeans(n_clusters=vocab_size, mode='euclidean', verbose=1, max_iter=max_kmeans_steps, device=device)
-        centroids = kmeans.fit_predict(torch.tensor(np.array(pred_vectors)).to(device))
+        kmeans = KMeans(n_clusters=vocab_size, mode='euclidean', verbose=1, max_iter=max_kmeans_steps,
+                        minibatch=min(100_000, len(pred_vectors)))
+        kmeans.fit_predict(torch.tensor(np.array(pred_vectors)).to(device))
+        centroids = kmeans.centroids
     end = time.time()
     print(f"KMeans took {end - start} seconds.")
-    return torch.from_numpy(centroids).float().to(device)
+    return centroids
 
 
 def diversity_loss(vectors, subsample_size=1000):
@@ -196,9 +216,9 @@ def train(encoder_model, decoder_model, train_data, criterion,
         else:
             soft_preds = encoder_model(batch) 
             reconstructed = decoder_model(soft_preds)
-            loss_div = torch.zeros(1)
-            loss_vq = torch.zeros(1)
-            loss_commit = torch.zeros(1)
+            loss_div = torch.zeros(1, device=device)
+            loss_vq = torch.zeros(1, device=device)
+            loss_commit = torch.zeros(1, device=device)
             tokens = '-1'
 
         num_classes = reconstructed.shape[-1]
@@ -255,6 +275,8 @@ def main():
             'kmeans_steps': 25,
             'eval_every': 100,
             'version': 'shakespeare',
+            'kmeans_algo': 'sklearn',
+            'restore_dir': None,
         }
     else:
         config = {
@@ -279,6 +301,8 @@ def main():
             'kmeans_steps': 20,
             'eval_every': 1000,
             'version': 'wiki',
+            'kmeans_algo': 'torch',
+            'restore_dir': None,
         }
     # start a new wandb run to track this script
     if USE_WANDB:
@@ -288,6 +312,10 @@ def main():
             # track hyperparameters and run metadata
             config=config
         )
+        run_id = wandb.run.id
+        print("Run id is: ", run_id)
+    else:
+        run_id = "local_run"
     train_data, eval_data = data.create_data_loaders(
         chunk_size=config['chunk_size'],
         split_percentage=config['split_percentage'],
@@ -323,33 +351,52 @@ def main():
         use_vq=False,
         max_len=config['chunk_size'],
         compression_factor=1./config["compression_factor"]).to(device)
+
     # Penalize the model for reconstructing the binary input.
     criterion = torch.nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(list(encoder_model.parameters()) + list(decoder_model.parameters()), lr=config['lr'])
 
-    os.makedirs('/tmp/continuous_checkpoints', exist_ok=True)
-    os.makedirs('/tmp/discrete_checkpoints', exist_ok=True)
-    continuous_losses = train(
-        encoder_model=encoder_model,
-        decoder_model=decoder_model,
-        train_data=train_data,
-        criterion=criterion, optimizer=optimizer,
-        start_step=0, max_steps=config['steps_before_vq'],
-        diversity_weight=config['diversity_weight'],
-        use_vq=False)
-    print("Saving continuous model...")
-    save_model(encoder_model, decoder_model, '/tmp/continuous_checkpoints', config['steps_before_vq'])
-    _, _ = evaluate(encoder_model, decoder_model, eval_data,
-                    criterion=criterion, use_vq=False)
-    init_codebook = kmeans_features(encoder_model=encoder_model,
-                                    train_data=train_data,
-                                    vocab_size=config['num_latent_vectors'],
-                                    max_gather_steps=config['kmeans_gather_steps'],
-                                    max_kmeans_steps=config['kmeans_steps'])
-    encoder_model.use_vq = True
-    encoder_model.set_codebook(init_codebook)
-
+    discrete_checkpoint_dir = f'/tmp/{run_id}_discrete_checkpoints'
+    continuous_checkpoint_dir = f'/tmp/{run_id}_continuous_checkpoints'
+    os.makedirs(continuous_checkpoint_dir, exist_ok=True)
+    os.makedirs(discrete_checkpoint_dir, exist_ok=True)
     steps = 0
+    if config['restore_dir'] is None: # Train from scratch.
+        print("Training continuous model from scratch...")
+        continuous_losses = train(
+            encoder_model=encoder_model,
+            decoder_model=decoder_model,
+            train_data=train_data,
+            criterion=criterion, optimizer=optimizer,
+            start_step=0, max_steps=config['steps_before_vq'],
+            diversity_weight=config['diversity_weight'],
+            use_vq=False)
+        print("Saving continuous model...")
+        save_model(encoder_model, decoder_model, continuous_checkpoint_dir, config['steps_before_vq'])
+        _, _ = evaluate(encoder_model, decoder_model, eval_data,
+                        criterion=criterion, use_vq=False)
+    elif 'continuous' in config['restore_dir']:
+        encoder_model, steps = load_model(config['restore_dir'], encoder_model, model_name="encoder")
+        decoder_model, dec_steps = load_model(config['restore_dir'], decoder_model, model_name="decoder")
+        assert steps == dec_steps
+        print(f"Restored continuous model from {config['restore_dir']} at step {steps}")
+
+    if config['restore_dir'] is not None and 'discrete' in config['restore_dir']:
+        encoder_model, steps = load_model(config['restore_dir'], encoder_model, model_name="encoder")
+        decoder_model, dec_steps = load_model(config['restore_dir'], decoder_model, model_name="decoder")
+        assert steps == dec_steps
+        print(f"Restored discrete model from {config['restore_dir']} at step {steps}")
+    else:
+        assert config['kmeans_algo'] in ['torch', 'sklearn']
+        init_codebook = kmeans_features(encoder_model=encoder_model,
+                                        train_data=train_data,
+                                        vocab_size=config['num_latent_vectors'],
+                                        max_gather_steps=config['kmeans_gather_steps'],
+                                        max_kmeans_steps=config['kmeans_steps'],
+                                        torch_kmeans=config['kmeans_algo'] == 'torch')
+        encoder_model.use_vq = True
+        encoder_model.set_codebook(init_codebook)
+
     checkpoint_dir = '/tmp/discrete_checkpoints'
     for _ in range(2): # Pretrain continuous
         train_losses = train(encoder_model, decoder_model, train_data,
