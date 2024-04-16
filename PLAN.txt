@@ -1,0 +1,6 @@
+
+- Show loss / accuracy with GPT-4 tokenization vs byte pooling, make the case that tokenization is not needed
+- Show compression ratio with learned tokenizer, show that GPT can be trained on learned tokenizer
+- Show that compression ratio of learned tokenizer is as good or better than GPT tokenizer
+- Analyze mistakes / behavior of learned tokenizer
+

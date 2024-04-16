@@ -11,11 +11,15 @@ def bytes_to_int_chunks(bytestring, chunk_size=128):
 
 
 class BytesDataset(Dataset):
-    def __init__(self, text_path, chunk_size=128, train=True, split_percentage=0.8, use_bits=False):
+    def __init__(self, text_path, chunk_size=128, train=True, split_percentage=0.8, use_bits=False,
+                 with_targets=False):
         print("Loading data...")
         self.chunk_size = chunk_size
         self.train = train
         self.use_bits = use_bits
+        self.with_targets = with_targets
+        if self.with_targets:
+            self.chunk_size += 1
 
         # Load the text file
         with open(text_path, 'br') as file:
@@ -72,17 +76,22 @@ class BytesDataset(Dataset):
             # Convert the bytes to a tensor of integers (0-255)
             tensor = torch.tensor([byte for byte in chunk], dtype=torch.int32)
 
+        if self.with_targets:
+            return tensor[:-1], tensor[1:]
+
         return tensor
 
-def create_data_loaders(version, chunk_size=128, split_percentage=0.8, batch_size=10, use_bits=True):
+def create_data_loaders(version, chunk_size=128, split_percentage=0.8, batch_size=10, use_bits=False, with_targets=False):
     if version == 'shakespeare':
         text_path = 'input.txt'
     elif version == 'wiki':
         text_path = 'simple_wiki.txt'
     else:
         raise NotImplementedError(f'Version {version} not implemented.')
-    train_dataset = BytesDataset(text_path, chunk_size=chunk_size, train=True, split_percentage=split_percentage, use_bits=use_bits)
-    test_dataset = BytesDataset(text_path, chunk_size=chunk_size, train=False, split_percentage=split_percentage, use_bits=use_bits)
+    train_dataset = BytesDataset(text_path, chunk_size=chunk_size, train=True, split_percentage=split_percentage, use_bits=use_bits,
+                                 with_targets=with_targets)
+    test_dataset = BytesDataset(text_path, chunk_size=chunk_size, train=False, split_percentage=split_percentage, use_bits=use_bits,
+                                with_targets=with_targets)
     train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=0)
     test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=True, num_workers=0)
 
